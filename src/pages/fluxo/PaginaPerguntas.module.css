@@ -1,0 +1,61 @@
+/* Páginas 5 a 9: perguntas do contrato. Só tokens. */
+.pagina { display: flex; flex-direction: column; gap: var(--spacing-xl); max-width: 48rem; }
+
+.intro { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.h1 { margin: 0; font: var(--text-heading-6); letter-spacing: var(--text-heading-6-tracking); color: var(--color-text-primary); text-wrap: balance; }
+@media (min-width: 768px)  { .h1 { font: var(--text-heading-5); letter-spacing: var(--text-heading-5-tracking); } }
+.lead { margin: 0; max-width: 36rem; font: var(--text-body-m); letter-spacing: var(--text-body-m-tracking); color: var(--color-text-secondary); }
+
+.pergunta { display: flex; flex-direction: column; gap: var(--spacing-md); }
+.pergunta + .pergunta { padding-top: var(--spacing-lg); border-top: var(--border-width-thin) solid var(--color-border-subtle); }
+/* Página com seções: cada seção é um bloco só (título e as perguntas dela, sem linhas entre elas); as seções se separam por uma linha */
+.secaoPagina { display: flex; flex-direction: column; gap: var(--spacing-lg); }
+.secaoPagina + .secaoPagina { padding-top: var(--spacing-lg); border-top: var(--border-width-thin) solid var(--color-border-subtle); }
+/* o espaço entre as perguntas de uma mesma seção é de 32px; o título fica mais perto do que vem abaixo */
+.blocosDaSecao { display: flex; flex-direction: column; gap: var(--spacing-xl); }
+.blocosDaSecao > .pergunta + .pergunta { padding-top: 0; border-top: 0; }
+/* campos que dependem da pergunta de cima ficam a 16px dela, em vez dos 32px entre perguntas */
+.blocosDaSecao > .colada { margin-top: calc(var(--spacing-md) - var(--spacing-xl)); }
+
+.secao { display: flex; flex-direction: column; gap: var(--spacing-md); }
+.h2 { margin: 0; font: var(--text-subtitle-xl); font-family: var(--font-display); font-weight: var(--font-weight-heading); letter-spacing: var(--text-subtitle-xl-tracking); color: var(--color-text-primary); }
+/* nível abaixo do título da seção */
+.h3 { margin: 0; font: var(--text-subtitle-l); font-weight: var(--font-weight-heading); letter-spacing: var(--text-subtitle-l-tracking); color: var(--color-text-primary); }
+.grade { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--spacing-md); }
+@media (min-width: 640px) { .grade { grid-template-columns: repeat(2, minmax(0, 1fr)); } .cheio { grid-column: 1 / -1; } }
+.erroGrupo { margin: var(--spacing-xs) 0 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-status-error-text, var(--color-text-primary)); }
+
+/* Voltar à esquerda, Seguinte à direita (no celular, Seguinte em cima, em largura toda) */
+.acoes { display: flex; flex-direction: column-reverse; gap: var(--spacing-sm); padding-top: var(--spacing-md); border-top: var(--border-width-thin) solid var(--color-border-subtle); }
+.acoes > button { width: 100%; }
+@media (min-width: 640px) {
+  .acoes { flex-direction: row; align-items: center; justify-content: space-between; }
+  .acoes > button { width: auto; }
+}
+
+/* Observação no fim da página: só texto, menor e em cor neutra, sem caixa nem destaque */
+.notaFinal { margin: 0; max-width: 36rem; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+
+/* Inventário: uma linha por item (item, quantidade e estado), com o botão de remover ao lado */
+.inventario { display: flex; flex-direction: column; gap: var(--spacing-md); }
+.inventario > button:last-child { align-self: flex-start; }
+.itemInventario { display: flex; align-items: flex-start; gap: var(--spacing-sm); padding-bottom: var(--spacing-md); border-bottom: var(--border-width-thin) solid var(--color-border-subtle); }
+.itemInventarioCampos { flex: 1; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--spacing-md); }
+@media (min-width: 640px) { .itemInventarioCampos { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1.5fr); } }
+.itemInventario > button { flex-shrink: 0; margin-top: var(--spacing-xl); }
+
+/* Prazo de 10 anos ou mais: quem é casado(a) e o estado dos dados do cônjuge anuente */
+.anuenciaTexto { margin: 0; max-width: 36rem; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+.anuentes { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--spacing-md); }
+.anuente { display: flex; flex-direction: column; align-items: flex-start; gap: var(--spacing-sm); padding-bottom: var(--spacing-md); border-bottom: var(--border-width-thin) solid var(--color-border-subtle); }
+.anuente:last-child { padding-bottom: 0; border-bottom: 0; }
+@media (min-width: 640px) { .anuente { flex-direction: row; align-items: center; justify-content: space-between; } }
+.anuenteTexto { display: flex; flex-direction: column; gap: var(--spacing-2xs); min-width: 0; }
+.anuenteNome { margin: 0; font: var(--text-subtitle-s); letter-spacing: var(--text-subtitle-s-tracking); color: var(--color-text-primary); }
+.anuenteNome span { font: var(--text-body-s); font-weight: var(--font-weight-body); color: var(--color-text-secondary); }
+.anuenteEstado { margin: 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+.anuenteErro { margin: 0; display: flex; align-items: center; gap: var(--spacing-xs); font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-error); }
+.anuenteErro svg { flex-shrink: 0; }
+
+/* campos da janela do cônjuge anuente */
+.modalConjuge { display: flex; flex-direction: column; gap: var(--spacing-md); }

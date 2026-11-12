@@ -1,0 +1,15 @@
+/* Corpo do modal de compartilhar o resumo: compacto, sem cards; as duas funções se separam por uma linha. Só tokens. */
+.corpo { display: flex; flex-direction: column; gap: var(--spacing-md); }
+/* o texto do aviso de validade fica no tamanho do texto de apoio das seções (14px), e não nos 12px padrão do aviso */
+.validade [role="status"] > div > div { font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); }
+.grupo { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.grupo + .grupo { padding-top: var(--spacing-md); border-top: var(--border-width-thin) solid var(--color-border-subtle); }
+.h3 { display: flex; align-items: center; gap: var(--spacing-xs); margin: 0; font: var(--text-subtitle-m); font-weight: var(--font-weight-heading); letter-spacing: var(--text-subtitle-m-tracking); color: var(--color-text-primary); }
+.h3 svg { flex-shrink: 0; color: var(--color-text-brand); }
+.ajuda { margin: 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+/* texto de apoio, com menos peso que a explicação da seção */
+.apoio { margin: 0; font: var(--text-body-xs); letter-spacing: var(--text-body-xs-tracking); color: var(--color-text-tertiary); }
+/* botões de compartilhar lado a lado (no celular, um embaixo do outro, em largura toda) */
+.botoes { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.botoes > button { width: 100%; }
+@media (min-width: 640px) { .botoes { flex-direction: row; flex-wrap: wrap; } .botoes > button { width: auto; } }

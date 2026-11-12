@@ -1,0 +1,45 @@
+/* Stepper geral (etapas) e stepper das páginas da etapa atual. Só tokens.
+   Estados padronizados nos dois níveis: concluída = verde claro, atual = verde cheio, futura = cinza (tom mais escuro que o das bordas comuns, para a linha se ver bem). */
+.stepper { --cor-linha-stepper: color-mix(in srgb, var(--color-border-muted) 55%, var(--color-border-subtle)); display: flex; flex-direction: column; gap: calc(var(--spacing-sm) + var(--spacing-xs)); }
+
+/* ─── Geral ─── */
+.geral { display: flex; list-style: none; margin: 0; padding: 0; align-items: center; }
+
+.etapa { display: flex; align-items: center; gap: var(--spacing-sm); flex: 0 0 auto; color: var(--color-text-tertiary); }
+/* linha que liga uma etapa à seguinte */
+.etapa:not(:last-child) { flex: 1 1 auto; }
+.etapa:not(:last-child)::after { content: ''; flex: 1 1 auto; min-width: var(--spacing-md); margin-inline: var(--spacing-sm); border-top: var(--spacing-2xs) solid var(--cor-linha-stepper); border-radius: var(--radius-full); }
+.etapa.feita:not(:last-child)::after { border-top-color: var(--color-brand-300); }
+
+.num { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: var(--spacing-xl); height: var(--spacing-xl); border: var(--border-width-thin) solid currentColor; border-radius: var(--radius-full); font: var(--text-subtitle-s); line-height: 1; padding: 0; font-variant-numeric: lining-nums tabular-nums; }
+.nome { font: var(--text-subtitle-m); letter-spacing: var(--text-subtitle-m-tracking); white-space: nowrap; }
+.somenteLeitura { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* celular: só a etapa atual mostra o nome (as outras ficam só no leitor de tela) */
+@media (max-width: 639px) {
+  .etapa:not(.atual) .nome { position: absolute; width: 0; height: 0; overflow: hidden; }
+  .etapa:not(:last-child)::after { min-width: var(--spacing-sm); margin-inline: var(--spacing-xs); }
+  /* o nome da etapa atual pode quebrar em duas linhas (ex.: "Estilo e pagamento") para o stepper caber na largura */
+  .etapa.atual { min-width: 0; flex-shrink: 1; }
+  .etapa.atual .nome { white-space: normal; }
+}
+
+.etapa.atual { color: var(--color-text-brand); }
+.etapa.atual .num { background: var(--color-action-primary); border-color: var(--color-action-primary); color: var(--color-on-action-primary); }
+.etapa.atual .nome { font-weight: var(--font-weight-heading); }
+.etapa.feita { color: var(--color-text-secondary); }
+.etapa.feita .num { background: var(--color-bg-brand); border-color: var(--color-brand-300); color: var(--color-text-brand); }
+
+/* ─── Páginas da etapa atual (mais discreto, ligado à etapa pelo nome e pela cor) ─── */
+.paginas { display: flex; flex-direction: column; gap: var(--spacing-xs); padding: var(--spacing-sm) var(--spacing-md); background: var(--color-bg-subtle); border-radius: var(--radius-sm); }
+.paginasTexto { margin: 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-tertiary); }
+.paginasEtapa { font-weight: var(--font-weight-label); color: var(--color-text-brand); }
+.paginasNome { font-weight: var(--font-weight-label); color: var(--color-text-primary); }
+.paginasLista { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--spacing-2xs); }
+/* as páginas que ainda não foram: em cinza claro, bem visível sobre o fundo da caixa */
+.pagina { flex: 1 1 0; height: var(--spacing-xs); border-radius: var(--radius-full); background: var(--color-gray-300); }
+:global([data-theme="dark"]) .pagina { background: var(--color-gray-600); }
+.pagina.feita { background: var(--color-brand-300); }
+.pagina.atual { background: var(--color-action-primary); }
+:global([data-theme="dark"]) .pagina.feita { background: var(--color-brand-300); }
+:global([data-theme="dark"]) .pagina.atual { background: var(--color-action-primary); }

@@ -1,0 +1,150 @@
+/* ── Base ─────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--control-gap);
+  /* Tipografia do estilo Button/M (Foundations/Typography): 16px */
+  font: var(--text-button-m);
+  letter-spacing: var(--text-button-m-tracking);
+  /* md: altura mínima de 44px (igual aos campos). Com uma linha o conteúdo fica centralizado;
+     se o rótulo quebrar (zoom, tradução longa, coluna estreita), o botão cresce e o
+     padding-block mantém respiro entre o texto e a borda (24px de linha + 2 × 8px < 44px). */
+  min-height: var(--control-height-md);
+  padding: var(--spacing-sm) var(--control-padding-x-md);
+  border-radius: var(--radius-control);
+  border: var(--border-width-thin) solid transparent;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+/* Com ícone, gap e padding do lado do ícone reduzem */
+.btn.hasLeft  { gap: var(--control-gap-icon); padding-left: var(--control-padding-x-icon-md); }
+.btn.hasRight { gap: var(--control-gap-icon); padding-right: var(--control-padding-x-icon-md); }
+
+.btn:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* ── Icon wrapper ─────────────────────────────────── */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ── Variants ─────────────────────────────────────── */
+.primary {
+  background-color: var(--color-action-primary);
+  color: var(--color-on-action-primary);
+  border-color: var(--color-action-primary);
+}
+.primary:hover:not(:disabled) {
+  background-color: var(--color-action-primary-hover);
+  border-color: var(--color-action-primary-hover);
+  color: var(--color-on-action-primary-hover);
+}
+.primary:active:not(:disabled) {
+  background-color: var(--color-action-primary-pressed);
+  border-color: var(--color-action-primary-pressed);
+  color: var(--color-on-action-primary-pressed);
+}
+
+.secondary {
+  background-color: transparent;
+  color: var(--color-action-primary);
+  border-color: var(--color-action-primary);
+}
+.secondary:hover:not(:disabled) {
+  background-color: var(--color-bg-brand);
+  border-color: var(--color-action-primary-hover);
+  color: var(--color-action-primary-hover);
+}
+.secondary:active:not(:disabled) {
+  background-color: var(--color-bg-brand-pressed);
+  border-color: var(--color-action-primary-pressed);
+  color: var(--color-action-primary-pressed);
+}
+
+.destructive {
+  background-color: var(--color-action-error);
+  color: var(--color-on-action-error);
+  border-color: var(--color-action-error);
+}
+.destructive:hover:not(:disabled) {
+  background-color: var(--color-action-error-hover);
+  border-color: var(--color-action-error-hover);
+}
+.destructive:active:not(:disabled) {
+  background-color: var(--color-action-error-pressed);
+  border-color: var(--color-action-error-pressed);
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border-color: transparent;
+}
+.ghost:hover:not(:disabled) { background-color: var(--color-bg-subtle); }
+.ghost:active:not(:disabled) { background-color: var(--color-bg-disabled); }
+
+/* Outline: fundo da superfície + borda neutra. Ação secundária de configuração da tela
+   (ex.: personalizar colunas); não usa a cor da marca e não compete com a ação principal. */
+.outline {
+  background-color: var(--color-action-outline-bg);
+  color: var(--color-action-outline-text);
+  border-color: var(--color-action-outline-border);
+  font-weight: var(--font-weight-label);
+}
+.outline:hover:not(:disabled) { background-color: var(--color-action-outline-hover-bg); }
+.outline:active:not(:disabled) { background-color: var(--color-action-outline-pressed-bg); }
+
+/* ── Disabled ─────────────────────────────────────── */
+.btn:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: var(--opacity-disabled);
+}
+
+/* ── Sizes (.md usa os valores base do .btn) ──────── */
+.sm {
+  /* Button/S: 14px; altura fixa de 36px (44px - spacing-sm). Altura fixa → rótulo em uma linha. */
+  font: var(--text-button-s);
+  letter-spacing: var(--text-button-s-tracking);
+  min-height: 0;
+  height: calc(var(--control-height-md) - var(--spacing-sm));
+  padding: 0 var(--control-padding-x-sm);
+  white-space: nowrap;
+  border-radius: var(--radius-control-sm);
+}
+.sm.hasLeft  { padding-left: var(--control-padding-x-icon-sm); }
+.sm.hasRight { padding-right: var(--control-padding-x-icon-sm); }
+.outline.sm  { font-weight: var(--font-weight-label); }
+
+.lg {
+  min-height: 0;
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-tight);
+  padding: var(--control-padding-y-lg) var(--control-padding-x-lg);
+}
+.lg.hasLeft  { padding-left: var(--control-padding-x-icon-lg); }
+.lg.hasRight { padding-right: var(--control-padding-x-icon-lg); }
+
+/* ── Icon Only ────────────────────────────────────── */
+.iconOnly         { width: var(--control-height-md); padding: 0; gap: 0; }   /* md: 44×44 */
+.iconOnly.sm      { width: calc(var(--control-height-md) - var(--spacing-sm)); padding: 0; } /* sm: 36×36 */
+.iconOnly.lg      { width: auto; padding: var(--control-padding-y-lg); }
+.iconOnly.hasLeft,
+.iconOnly.hasRight { padding-left: 0; padding-right: 0; }
+.iconOnly.sm.hasLeft,
+.iconOnly.sm.hasRight { padding-left: 0; padding-right: 0; }
+.iconOnly.lg.hasLeft,
+.iconOnly.lg.hasRight { padding-left: var(--control-padding-y-lg); padding-right: var(--control-padding-y-lg); }

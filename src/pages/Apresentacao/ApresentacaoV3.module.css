@@ -1,0 +1,24 @@
+/* Tela 0, versão 3: estrutura da v1 com a ilustração da v2 e só um brilho verde suave. Só tokens. */
+
+/* Celular: texto e fatos, depois a ilustração. Desktop: texto e fatos à esquerda, ilustração à direita. */
+.intro { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--spacing-xl); align-items: center; }
+@media (min-width: 1024px) { .intro { grid-template-columns: minmax(0, 1fr) minmax(0, 30rem); gap: var(--spacing-2xl); } }
+.esquerda { display: flex; flex-direction: column; gap: var(--spacing-xl); min-width: 0; }
+.texto { display: flex; flex-direction: column; align-items: flex-start; gap: var(--spacing-md); min-width: 0; }
+.arte { width: 100%; max-width: 30rem; margin-inline: auto; }
+
+.h1 { margin: 0; max-width: 40rem; font: var(--text-heading-5); letter-spacing: var(--text-heading-5-tracking); color: var(--color-gray-800); text-wrap: balance; }
+:global([data-theme="dark"]) .h1 { color: var(--color-text-primary); }
+@media (min-width: 768px)  { .h1 { font: var(--text-heading-4); letter-spacing: var(--text-heading-4-tracking); } }
+@media (max-width: 479px)  { .h1 { font: var(--text-heading-6); letter-spacing: var(--text-heading-6-tracking); } }
+.destaque { color: var(--color-text-brand); white-space: nowrap; }
+.lead { margin: 0; max-width: 34rem; font: var(--text-body-m); letter-spacing: var(--text-body-m-tracking); color: var(--color-text-secondary); }
+.acoes { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); padding-top: var(--spacing-xs); }
+
+/* Os três fatos, como na v1 (sem caixa), com o ícone na cor da marca */
+.pilares { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--spacing-md); }
+@media (min-width: 768px) { .pilares { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--spacing-lg); align-items: start; } }
+.pilar { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+.pilarTitulo { margin: 0; display: flex; align-items: center; gap: var(--spacing-sm); font: var(--text-subtitle-m); letter-spacing: var(--text-subtitle-m-tracking); color: var(--color-text-primary); }
+.pilarTitulo svg { flex-shrink: 0; color: var(--color-text-brand); }
+.pilarTexto { margin: 0; max-width: 24rem; font: var(--text-body-xs); letter-spacing: var(--text-body-xs-tracking); color: var(--color-text-secondary); }

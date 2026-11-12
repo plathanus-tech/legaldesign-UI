@@ -1,0 +1,74 @@
+/* Tela 1.2: pessoas envolvidas (quem está alugando). Só tokens. */
+.pagina { display: flex; flex-direction: column; gap: var(--spacing-xl); max-width: 48rem; }
+
+.intro { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.h1 { margin: 0; font: var(--text-heading-6); letter-spacing: var(--text-heading-6-tracking); color: var(--color-text-primary); text-wrap: balance; }
+@media (min-width: 768px)  { .h1 { font: var(--text-heading-5); letter-spacing: var(--text-heading-5-tracking); } }
+.lead { margin: 0; max-width: 36rem; font: var(--text-body-m); letter-spacing: var(--text-body-m-tracking); color: var(--color-text-secondary); }
+
+.parte { display: flex; flex-direction: column; gap: var(--spacing-xl); }
+.pergunta { padding-top: var(--spacing-lg); border-top: var(--border-width-thin) solid var(--color-border-subtle); }
+
+/* Perguntas entre os blocos (mais de um? como ficam as responsabilidades?) */
+.pergunta + .pergunta { margin-top: 0; }
+
+/* Atalho para importar os dados salvos */
+.importar { display: flex; flex-direction: column; gap: var(--spacing-md); padding: var(--spacing-md); background: var(--color-bg-subtle); border: var(--border-width-thin) solid var(--color-border-subtle); border-radius: var(--radius-md); }
+.importarTexto { display: flex; flex-direction: column; gap: var(--spacing-2xs); }
+.importarTitulo { margin: 0; font: var(--text-subtitle-m); letter-spacing: var(--text-subtitle-m-tracking); color: var(--color-text-primary); }
+.importarAjuda { margin: 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+.importar > button { width: 100%; }
+.arquivo { display: none; }
+@media (min-width: 640px) {
+  .importar { flex-direction: row; align-items: center; justify-content: space-between; }
+  .importar > button { width: auto; flex-shrink: 0; }
+}
+
+.secao { display: flex; flex-direction: column; gap: var(--spacing-md); }
+.h2 { margin: 0; font: var(--text-subtitle-xl); font-family: var(--font-display); font-weight: var(--font-weight-heading); letter-spacing: var(--text-subtitle-xl-tracking); color: var(--color-text-primary); }
+.grade { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--spacing-md); }
+@media (min-width: 640px) { .grade { grid-template-columns: repeat(2, minmax(0, 1fr)); } .cheio { grid-column: 1 / -1; } }
+.erroGrupo { margin: var(--spacing-xs) 0 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-status-error-text, var(--color-text-primary)); }
+
+.salvar { display: flex; flex-direction: column; gap: var(--spacing-md); padding-top: var(--spacing-lg); border-top: var(--border-width-thin) solid var(--color-border-subtle); }
+.ajuda { margin: 0; max-width: 36rem; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+
+/* Voltar à esquerda, Seguinte à direita (no celular, Seguinte em cima, em largura toda) */
+.acoes { display: flex; flex-direction: column-reverse; gap: var(--spacing-sm); padding-top: var(--spacing-md); border-top: var(--border-width-thin) solid var(--color-border-subtle); }
+.acoes > button { width: 100%; }
+@media (min-width: 640px) {
+  .acoes { flex-direction: row; align-items: center; justify-content: space-between; }
+  .acoes > button { width: auto; }
+}
+
+/* Jeito de conversa: o que vem depois entra suavemente, e uma frase curta reage quando a pessoa termina um bloco */
+.aparece { animation: aparecer var(--transition-normal) both; }
+@keyframes aparecer { from { opacity: 0; transform: translateY(var(--spacing-sm)); } to { opacity: 1; transform: none; } }
+.pronto { margin: 0; display: flex; align-items: center; gap: var(--spacing-xs); font: var(--text-body-s); font-weight: var(--font-weight-label); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-brand); }
+
+/* Bloco da segunda pessoa: título à esquerda e o botão de tirar à direita, acima do formulário dela */
+.segundoBloco { display: flex; flex-direction: column; gap: var(--spacing-md); padding-top: var(--spacing-lg); border-top: var(--border-width-thin) solid var(--color-border-subtle); }
+.segundoTopo { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-md); flex-wrap: wrap; }
+
+/* Janela de escolha do que salvar: as opções em coluna */
+.escolhaSalvar { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+
+/* "Adicionar outro": 4px entre a frase e o botão (o mesmo espaço entre o rótulo e o campo do formulário), e a frase no tamanho dos rótulos do formulário */
+.adicionar { display: flex; flex-direction: column; gap: var(--spacing-xs); padding-top: var(--spacing-lg); border-top: var(--border-width-thin) solid var(--color-border-subtle); }
+.adicionarAjuda { margin: 0; max-width: 36rem; font-size: var(--font-size-base); line-height: var(--line-height-snug); color: var(--color-text-secondary); }
+
+/* Subtítulo do bloco "salvar para usar depois": 16px (Body/M), como os rótulos do formulário */
+.salvarAjuda { margin: 0; max-width: 36rem; font: var(--text-body-m); letter-spacing: var(--text-body-m-tracking); color: var(--color-text-secondary); }
+
+/* Cônjuge anuente: aviso discreto e, quando necessário, os campos dentro da própria pessoa */
+/* o botão de texto alinha o começo do texto dele ao começo do texto da nota (compensa o respiro interno do botão) */
+.acaoConjuge { margin-top: var(--spacing-xs); margin-left: calc(var(--control-padding-x-md) * -1); }
+.notaConjuge { margin: 0; max-width: 36rem; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+.conjuge { display: flex; flex-direction: column; gap: var(--spacing-sm); padding: var(--spacing-md); background: var(--color-bg-surface); border: var(--border-width-thin) solid var(--color-border-subtle); border-radius: var(--radius-md); }
+/* espaço de 4px entre o X e o texto (o botão usa 8px por padrão) */
+.botaoRemover { --control-gap-icon: var(--spacing-xs); color: var(--color-text-secondary); }
+.conjugeTopo { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-md); flex-wrap: wrap; }
+.h3 { margin: 0; font: var(--text-subtitle-m); font-weight: var(--font-weight-heading); letter-spacing: var(--text-subtitle-m-tracking); color: var(--color-text-primary); }
+
+/* "(opcional)" ao lado de um título de seção, no mesmo tom dos campos opcionais */
+.opcionalTitulo { font: var(--text-body-s); font-weight: var(--font-weight-body); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-tertiary); }

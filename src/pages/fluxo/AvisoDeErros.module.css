@@ -1,0 +1,2 @@
+/* Aviso de erro no alto da tela, centralizado, abaixo do cabeçalho. Só tokens. */
+.aviso { position: fixed; top: calc(var(--spacing-2xl) + var(--spacing-md)); left: 50%; transform: translateX(-50%); z-index: var(--z-toast); width: min(32rem, calc(100vw - var(--spacing-xl))); box-shadow: var(--shadow-lg); border-radius: var(--radius-control); background: var(--color-bg-raised); }

@@ -1,0 +1,52 @@
+/* Prévia do documento: parte da primeira folha, com títulos visíveis e o texto das cláusulas borrado. Só tokens. */
+.moldura { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.nota { margin: 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+
+/* A folha mostra só uma parte do documento: o pé esmaece */
+.folha {
+  display: flex; flex-direction: column; gap: var(--spacing-md);
+  max-height: 28rem; overflow: hidden;
+  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-lg);
+  background: var(--color-bg-surface); border: var(--border-width-thin) solid var(--color-border-subtle); border-radius: var(--radius-md); box-shadow: var(--shadow-md);
+  -webkit-mask-image: linear-gradient(to bottom, black 78%, transparent);
+  mask-image: linear-gradient(to bottom, black 78%, transparent);
+}
+@media (max-width: 479px) { .folha { padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md); } }
+
+/* O que não pode ser lido nem copiado */
+.borrado { margin: 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); filter: blur(var(--spacing-xs)); user-select: none; pointer-events: none; overflow: hidden; max-height: 5.5rem; text-align: justify; }
+.borradoCurto { max-height: 2.75rem; }
+.logo { display: block; max-height: var(--spacing-2xl); max-width: 10rem; object-fit: contain; }
+
+/* ─── Clássico: título centralizado, cláusulas numeradas, texto corrido ─── */
+.cTopo { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-xs); text-align: center; margin-bottom: var(--spacing-xs); }
+.cTitulo { margin: 0; font: var(--text-subtitle-xl); font-family: var(--font-display); font-weight: var(--font-weight-heading); letter-spacing: var(--text-subtitle-xl-tracking); text-transform: uppercase; color: var(--color-text-primary); }
+.cSub { margin: 0; font: var(--text-body-s); color: var(--color-text-secondary); }
+.cSecao { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+.cHeading { margin: 0; font: var(--text-subtitle-m); font-weight: var(--font-weight-heading); letter-spacing: var(--text-subtitle-m-tracking); color: var(--color-text-primary); }
+
+/* ─── Moderno: marca, resumo em blocos com ícone, quadro de destaque e seções com ícone ─── */
+.mCabeca { display: flex; align-items: center; gap: var(--spacing-md); padding-bottom: var(--spacing-md); border-bottom: var(--border-width-thin) solid var(--color-border-subtle); }
+.mMarca { flex-shrink: 0; width: var(--spacing-xl); height: var(--spacing-xl); background: var(--color-bg-brand-strong); border-radius: var(--radius-control-sm); }
+.mTitulo { margin: 0; font: var(--text-subtitle-xl); font-family: var(--font-display); font-weight: var(--font-weight-heading); letter-spacing: var(--text-subtitle-xl-tracking); color: var(--color-text-primary); }
+.mSub { margin: 0; font: var(--text-body-s); color: var(--color-text-secondary); }
+.mResumo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--spacing-sm); }
+@media (min-width: 640px) { .mResumo { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.mBloco { display: flex; flex-direction: column; gap: var(--spacing-2xs); padding: var(--spacing-sm); background: var(--color-bg-subtle); border-radius: var(--radius-control); color: var(--color-text-tertiary); }
+.mDestaque { background: var(--color-bg-brand); color: var(--color-text-brand); }
+.mRotulo { font: var(--text-caption-m); font-weight: var(--font-weight-label); color: var(--color-text-secondary); }
+.mValor { font: var(--text-subtitle-m); color: var(--color-text-primary); filter: blur(var(--spacing-xs)); user-select: none; }
+.mCallout { display: flex; gap: var(--spacing-sm); align-items: flex-start; padding: var(--spacing-sm) var(--spacing-md); background: var(--color-bg-brand); border-left: var(--spacing-xs) solid var(--color-action-primary); border-radius: var(--radius-control-sm); color: var(--color-text-brand); }
+.mCalloutTitulo { display: block; margin-bottom: var(--spacing-2xs); font: var(--text-subtitle-m); font-weight: var(--font-weight-heading); color: var(--color-text-brand); }
+.mSecao { display: flex; gap: var(--spacing-md); align-items: flex-start; }
+.mIcone { flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; width: var(--spacing-xl); height: var(--spacing-xl); background: var(--color-bg-brand); border-radius: var(--radius-full); color: var(--color-text-brand); }
+.mHeading { margin: 0 0 var(--spacing-2xs); font: var(--text-subtitle-m); font-weight: var(--font-weight-heading); color: var(--color-text-primary); }
+
+/* ─── Minimalista: título fino, uma linha e seções com muito espaço ─── */
+.minimalista { gap: var(--spacing-lg); padding: var(--spacing-2xl) var(--spacing-2xl) var(--spacing-xl); }
+@media (max-width: 479px) { .minimalista { padding: var(--spacing-xl) var(--spacing-md) var(--spacing-md); } }
+.nTopo { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.nTitulo { margin: 0; font: var(--text-subtitle-l); font-weight: var(--font-weight-label); letter-spacing: var(--text-subtitle-l-tracking); color: var(--color-text-primary); }
+.nRegua { margin: 0; border: 0; border-top: var(--border-width-thin) solid var(--color-border-default); }
+.nSecao { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+.nHeading { margin: 0; font: var(--text-caption-m); font-weight: var(--font-weight-label); letter-spacing: var(--text-caption-m-tracking); text-transform: uppercase; color: var(--color-text-secondary); }

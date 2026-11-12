@@ -1,0 +1,39 @@
+.inputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input { composes: control from '../FormField/FormField.module.css'; }
+
+/* ícone (20px) a --spacing-sm da borda e --spacing-sm do texto */
+.hasLeft .input  { padding-left: calc(var(--spacing-sm) * 2 + 20px); }
+.hasRight .input { padding-right: calc(var(--spacing-sm) * 2 + 20px); }
+
+.iconLeft, .iconRight {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  color: var(--color-text-tertiary);
+  display: flex; align-items: center;
+  pointer-events: none;
+}
+.iconLeft  { left: var(--spacing-sm); }
+.iconRight { right: var(--spacing-sm); }
+
+/* Versão clicável de iconRight (ex.: mostrar/ocultar senha) — mesma posição, mas com
+   área de toque própria (mín. 24x24) e foco visível, já que aqui é um controle real. */
+.iconRightBtn {
+  position: absolute;
+  top: 50%; right: var(--spacing-2xs); transform: translateY(-50%);
+  display: flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  border: none; background: none; border-radius: var(--radius-control-sm);
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+}
+.iconRightBtn:disabled { cursor: not-allowed; color: var(--color-text-disabled); }
+.iconRightBtn:hover:not(:disabled) { color: var(--color-text-primary); background: var(--color-bg-subtle); }
+.iconRightBtn:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: calc(var(--focus-ring-width) * -1);
+}

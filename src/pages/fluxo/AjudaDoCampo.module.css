@@ -1,0 +1,8 @@
+/* a margem negativa só tira o excesso de altura do ícone (24) sobre a linha do rótulo (22): a área clicável continua 24×24 */
+.ajuda { display: inline-flex; align-items: center; margin-block: calc(var(--spacing-2xs) * -1); }
+/* ícone pequeno e discreto: 24×24 (o menor alvo aceito), para não deixar a linha do rótulo mais alta que a dos campos vizinhos */
+.ajuda button[aria-haspopup] { width: var(--spacing-lg); height: var(--spacing-lg); color: var(--color-text-tertiary); }
+.ajuda button[aria-haspopup]:hover, .ajuda button[aria-haspopup][aria-expanded="true"] { color: var(--color-text-primary); }
+.conteudo { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+.titulo { margin: 0; font: var(--text-body-m); font-weight: var(--font-weight-label); letter-spacing: var(--text-body-m-tracking); color: var(--color-text-primary); }
+.texto { margin: 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }

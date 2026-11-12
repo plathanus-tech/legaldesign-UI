@@ -1,0 +1,36 @@
+/* ════════════════════════════════════════════════════════════════
+   BRAND — único arquivo que um novo projeto precisa editar
+   para trocar a identidade visual.
+
+   Tudo o que está aqui é opcional: o que não for alterado
+   mantém o padrão da Base. Não edite componentes nem tokens.css.
+   Guia completo: TOKENS.md
+   ════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ─── Cores da marca ────────────────────────────────────────────
+     Informe UMA cor. As escalas 50…950 são geradas em tokens.css.
+     Precisa ter contraste ≥ 4.5:1 com branco (texto do botão).
+     Se a cor for clara, defina também --color-on-action-primary.  */
+  --brand-primary:   #15803D;
+
+  /* Cor secundária (opcional). Se o projeto não tiver uma,
+     mantenha o padrão ou aponte para a primária:
+     --brand-secondary: var(--brand-primary);                       */
+  --brand-secondary: #4F46E5;
+
+  /* ─── Fontes ────────────────────────────────────────────────────
+     display → títulos, botões e elementos de destaque
+     body    → textos, labels, campos, tabelas e descrições
+     Uma fonte só:  --font-display: var(--font-body);
+     Carregue as fontes em .storybook/preview-head.html e no app.   */
+  --font-display: 'Raleway', sans-serif;
+  --font-body:    'Roboto', sans-serif;
+
+  /* ─── Border radius ─────────────────────────────────────────────
+     Opcional. 1 = padrão da Base · 0 = quadrado · 1.5 = mais suave.
+     Para controle fino, sobrescreva os tokens semânticos:
+       --radius-control · --radius-control-sm · --radius-card
+       --radius-overlay · --radius-pill                              */
+  --radius-scale: 1;
+}

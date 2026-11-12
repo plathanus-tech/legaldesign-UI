@@ -1,0 +1,34 @@
+/* Estilos comuns das telas das etapas depois do preenchimento (2.2, 3.1, 4.1, 5.1, 5.2, A, B, C). Só tokens. */
+.pagina { display: flex; flex-direction: column; gap: var(--spacing-xl); max-width: 48rem; margin-inline: auto; width: 100%; }
+
+.intro { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.h1 { margin: 0; font: var(--text-heading-6); letter-spacing: var(--text-heading-6-tracking); color: var(--color-text-primary); text-wrap: balance; }
+@media (min-width: 768px)  { .h1 { font: var(--text-heading-5); letter-spacing: var(--text-heading-5-tracking); } }
+.lead { margin: 0; max-width: 36rem; font: var(--text-body-m); letter-spacing: var(--text-body-m-tracking); color: var(--color-text-secondary); }
+
+.secao { display: flex; flex-direction: column; gap: var(--spacing-md); }
+.secao + .secao { padding-top: var(--spacing-lg); border-top: var(--border-width-thin) solid var(--color-border-subtle); }
+.h2 { margin: 0; font: var(--text-subtitle-xl); font-family: var(--font-display); font-weight: var(--font-weight-heading); letter-spacing: var(--text-subtitle-xl-tracking); color: var(--color-text-primary); }
+.ajuda { margin: 0; max-width: 36rem; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+.grade { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--spacing-md); }
+@media (min-width: 640px) { .grade { grid-template-columns: repeat(2, minmax(0, 1fr)); } .cheio { grid-column: 1 / -1; } }
+.erroGrupo { margin: var(--spacing-xs) 0 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-status-error-text, var(--color-text-primary)); }
+.linha { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.linha > button { width: 100%; }
+@media (min-width: 640px) { .linha { flex-direction: row; align-items: flex-end; } .linha > :first-child { flex: 1 1 auto; } .linha > button { width: auto; flex-shrink: 0; } }
+.checks { display: flex; flex-direction: column; gap: var(--spacing-md); }
+
+/* Voltar à esquerda, ação principal à direita (no celular, a principal em cima, em largura toda) */
+.acoes { display: flex; flex-direction: column-reverse; gap: var(--spacing-sm); padding-top: var(--spacing-md); border-top: var(--border-width-thin) solid var(--color-border-subtle); }
+.acoes > button { width: 100%; }
+@media (min-width: 640px) {
+  .acoes { flex-direction: row; align-items: center; justify-content: space-between; }
+  .acoes > button { width: auto; }
+}
+
+/* Telas de resultado (sucesso, link expirado): conteúdo centralizado */
+.centro { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-md); text-align: center; }
+.icone { display: inline-flex; align-items: center; justify-content: center; width: var(--spacing-3xl); height: var(--spacing-3xl); border-radius: var(--radius-full); background: var(--color-bg-brand); color: var(--color-text-brand); }
+.botoes { display: flex; flex-direction: column; gap: var(--spacing-sm); width: 100%; }
+@media (min-width: 640px) { .botoes { flex-direction: row; justify-content: center; width: auto; } }
+

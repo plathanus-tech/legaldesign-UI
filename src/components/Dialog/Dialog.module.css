@@ -1,0 +1,90 @@
+.overlay {
+  position: fixed; inset: 0; z-index: var(--z-overlay);
+  background: var(--color-overlay);
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--spacing-md);
+}
+
+.dialog {
+  background: var(--color-bg-raised);
+  border-radius: var(--radius-overlay);
+  box-shadow: var(--shadow-2xl);
+  width: 100%; max-height: 90vh;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  /* Permite que .footer responda à largura real do dialog (não à da viewport). */
+  container-type: inline-size;
+}
+.dialog:focus { outline: none; }
+.sm { max-width: 22.5rem; }
+.md { max-width: 33.75rem; }
+.lg { max-width: 45rem; }
+
+.header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-md);
+  border-bottom: var(--border-width-thin) solid var(--color-border-subtle);
+}
+.title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-heading);
+  color: var(--color-text-primary);
+}
+.headings { display: flex; flex-direction: column; gap: var(--spacing-xs); min-width: 0; }
+.subtitle {
+  margin: 0;
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-snug);
+  color: var(--color-text-tertiary);
+}
+.closeBtn {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: none; border: none; cursor: pointer; padding: var(--spacing-xs);
+  color: var(--color-text-tertiary);
+  border-radius: var(--radius-control-sm);
+  line-height: 1;
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+.closeBtn:hover { color: var(--color-text-primary); background: var(--color-bg-subtle); }
+.closeBtn:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.body {
+  padding: var(--spacing-md) var(--spacing-lg);
+  flex: 1; overflow-y: auto;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.footer {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-top: var(--border-width-thin) solid var(--color-border-subtle);
+  display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--spacing-sm);
+}
+
+/* Dialog estreito: empilha com a ação principal (último botão) em cima ocupando toda
+   a largura, e o Cancelar também em largura total abaixo — evita corte e prioriza a ação principal. */
+@container (max-width: 26rem) {
+  .footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .footer > :first-child { order: 2; }
+  .footer > * { width: 100%; }
+  .footer > :last-child { order: 1; }
+}
+
+/* Bottom sheet (prop `sheet`): só em telas estreitas (≤ 640px, --breakpoint-sm) */
+@media (max-width: 640px) {
+  .overlaySheet { align-items: flex-end; padding: 0; }
+  .dialogSheet {
+    max-width: none;
+    max-height: 85dvh;
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
+  }
+}

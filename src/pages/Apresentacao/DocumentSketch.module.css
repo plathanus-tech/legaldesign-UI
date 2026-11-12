@@ -1,0 +1,49 @@
+/* Miniatura abstrata de documento. Só tokens; sem texto real. */
+.sheet {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: var(--color-bg-surface);
+  border: var(--border-width-thin) solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  overflow: hidden;
+}
+
+.bar { display: block; background: var(--color-border-muted); border-radius: var(--radius-xs); }
+.titleBar { height: var(--spacing-md); width: 60%; }
+.center { align-self: center; }
+
+.lines { display: flex; flex-direction: column; gap: var(--spacing-xs); flex: 1; min-width: 0; }
+.line { display: block; height: var(--spacing-xs); background: var(--color-border-disabled); border-radius: var(--radius-xs); }
+.short { width: 60%; }
+
+/* Tradicional: denso, sem hierarquia */
+.tradicional { gap: var(--spacing-xs); }
+
+/* Clássico: cláusulas numeradas */
+.clause { display: flex; gap: var(--spacing-sm); align-items: flex-start; }
+.number { flex-shrink: 0; width: var(--spacing-md); height: var(--spacing-md); background: var(--color-border-muted); border-radius: var(--radius-xs); }
+
+/* Visual Law: faixa, fatos, ícones e destaque */
+.band { background: var(--color-bg-brand-strong); border-radius: var(--radius-xs); padding: var(--spacing-sm); }
+.bandBar { height: var(--spacing-sm); width: 55%; background: var(--color-on-action-primary); }
+.facts { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-xs); }
+.chip { height: var(--spacing-md); background: var(--color-bg-brand); border: var(--border-width-thin) solid var(--color-brand-200); border-radius: var(--radius-pill); }
+.chipIcone { display: inline-flex; align-items: center; justify-content: center; height: var(--spacing-lg); color: var(--color-text-brand); }
+.calloutIcone { display: flex; gap: var(--spacing-sm); align-items: flex-start; }
+.calloutIcone > div { flex: 1; min-width: 0; }
+.calloutIco { flex-shrink: 0; color: var(--color-text-brand); }
+.row { display: flex; gap: var(--spacing-sm); align-items: center; }
+.icon { display: inline-flex; align-items: center; justify-content: center; color: var(--color-text-brand); flex-shrink: 0; width: var(--spacing-lg); height: var(--spacing-lg); background: var(--color-brand-200); border-radius: var(--radius-full); }
+.callout { background: var(--color-bg-brand); border-left: var(--spacing-xs) solid var(--color-action-primary); border-radius: var(--radius-xs); padding: var(--spacing-sm); }
+
+/* Minimalista: respiro e pouca informação */
+.minimalista { gap: var(--spacing-md); padding: var(--spacing-lg) var(--spacing-md); }
+.thinTitle { height: var(--spacing-sm); width: 45%; }
+.rule { display: block; height: var(--border-width-thin); background: var(--color-border-disabled); }
+.section { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+.heading { height: var(--spacing-sm); width: 35%; background: var(--color-border-disabled); }

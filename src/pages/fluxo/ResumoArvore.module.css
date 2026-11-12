@@ -1,0 +1,65 @@
+/* Índice do contrato em árvore. Só tokens. */
+.arvore { display: flex; flex-direction: column; gap: var(--spacing-md); }
+.grupo { display: flex; flex-direction: column; gap: var(--spacing-xs); padding-bottom: var(--spacing-md); border-bottom: var(--border-width-thin) solid var(--color-border-subtle); }
+.grupo:last-child { border-bottom: 0; padding-bottom: 0; }
+
+/* Cabeçalho: seta (recolhe) · nome (leva à seção) · estado */
+.cabecalho { display: flex; align-items: center; gap: var(--spacing-xs); min-height: var(--control-height-md); }
+.recolher, .recolherVazio { flex-shrink: 0; width: var(--spacing-xl); height: var(--spacing-xl); display: inline-flex; align-items: center; justify-content: center; }
+.recolher { background: none; border: 0; padding: 0; cursor: pointer; border-radius: var(--radius-control-sm); color: var(--color-text-tertiary); }
+.recolher:hover { background: var(--color-bg-subtle); }
+.recolher:focus-visible, .link:focus-visible, .nome:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.seta { transition: transform var(--transition-fast); }
+.recolhida { transform: rotate(-90deg); }
+
+.nome { flex: 1; min-width: 0; display: inline-flex; align-items: flex-start; gap: var(--spacing-xs); color: var(--color-text-primary); font: var(--text-subtitle-m); font-weight: var(--font-weight-heading); letter-spacing: var(--text-subtitle-m-tracking); }
+.link { background: none; border: 0; padding: 0; min-height: var(--spacing-xl); cursor: pointer; text-align: left; border-radius: var(--radius-control-sm); }
+.link .titulo { text-decoration: underline; text-decoration-color: var(--color-border-muted); text-underline-offset: var(--spacing-2xs); }
+.link:hover .titulo { text-decoration-color: currentColor; color: var(--color-text-brand); }
+.titulo { min-width: 0; }
+
+.status { flex-shrink: 0; margin-left: auto; font: var(--text-caption-s); letter-spacing: var(--text-caption-s-tracking); color: var(--color-text-tertiary); white-space: nowrap; }
+.statusAtual { padding: var(--spacing-2xs) var(--spacing-sm); border-radius: var(--radius-pill); background: var(--color-bg-brand); color: var(--color-text-brand); font-weight: var(--font-weight-label); }
+.statusAtencao { color: var(--color-text-primary); font-weight: var(--font-weight-label); }
+
+/* Seção que ainda não chegou: apagada, sem detalhes */
+.pendente .nome { color: var(--color-text-disabled, var(--color-text-tertiary)); }
+.iconePendente { flex-shrink: 0; color: var(--color-border-disabled); }
+.iconeAtencao { flex-shrink: 0; color: var(--color-text-primary); }
+
+.aviso { margin: 0 0 0 var(--spacing-xl); font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+
+/* Linha vertical da árvore, com um ponto em cada resposta */
+.lista { list-style: none; margin: var(--spacing-xs) 0 var(--spacing-xs) var(--spacing-md); padding: 0 0 0 var(--spacing-md); display: flex; flex-direction: column; gap: var(--spacing-md); border-left: var(--spacing-xs) solid var(--color-brand-100); }
+.item { position: relative; display: flex; flex-direction: column; gap: var(--spacing-2xs); }
+.item::before {
+  content: '';
+  position: absolute;
+  top: var(--spacing-xs);
+  /* centraliza o ponto (8px) na linha (4px): recuo da lista (16px) + linha (4px) + 2px */
+  left: calc(var(--spacing-md) * -1 - var(--spacing-xs) - var(--spacing-2xs));
+  width: var(--spacing-sm);
+  height: var(--spacing-sm);
+  border-radius: var(--radius-full);
+  background: var(--color-action-primary);
+}
+/* Item clicável: leva direto ao campo */
+.itemLink { display: flex; flex-direction: column; gap: var(--spacing-2xs); width: 100%; min-height: var(--spacing-xl); padding: 0; background: none; border: 0; text-align: left; cursor: pointer; color: inherit; font: inherit; border-radius: var(--radius-control-sm); }
+.itemLink:hover .valor { color: var(--color-text-brand); text-decoration: underline; text-underline-offset: var(--spacing-2xs); }
+.itemLink:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.rotulo { font: var(--text-caption-s); letter-spacing: var(--text-caption-s-tracking); color: var(--color-text-tertiary); }
+.valor { font: var(--text-subtitle-m); letter-spacing: var(--text-subtitle-m-tracking); color: var(--color-text-primary); overflow-wrap: anywhere; }
+.efeito { font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+@media (prefers-reduced-motion: reduce) { .seta { transition: none; } }
+
+/* O que falta preencher: lista só para ler, em tom de desabilitado e sem link (só o que já foi preenchido leva de volta à página) */
+.faltam { display: flex; flex-direction: column; gap: var(--spacing-xs); margin: var(--spacing-xs) 0 var(--spacing-xs) var(--spacing-xl); }
+.faltamTitulo { margin: 0; font: var(--text-caption-s); font-weight: var(--font-weight-label); letter-spacing: var(--text-caption-s-tracking); color: var(--color-text-tertiary); text-transform: uppercase; }
+.faltamLista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--spacing-2xs); }
+.faltaLink { display: flex; align-items: center; gap: var(--spacing-xs); width: 100%; min-height: var(--spacing-xl); padding: 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-disabled, var(--color-text-tertiary)); cursor: default; }
+.faltaIcone { flex-shrink: 0; color: var(--color-border-disabled); }
+.faltamNota { margin: 0; font: var(--text-caption-s); letter-spacing: var(--text-caption-s-tracking); color: var(--color-text-tertiary); }
+
+/* Ícone do assunto, antes do nome: na cor da marca; apagado nas seções que ainda não chegaram. Fica alinhado à primeira linha do nome (se o nome quebrar em duas, o ícone não desce para o meio) */
+.iconeGrupo { flex-shrink: 0; margin-top: var(--spacing-2xs); color: var(--color-text-brand); }
+.pendente .iconeGrupo { color: var(--color-text-tertiary); }

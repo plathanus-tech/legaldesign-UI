@@ -1,0 +1,77 @@
+/* Opção em card + grupo. Só tokens. */
+.grupo { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-direction: column; gap: var(--spacing-xs); }
+.legenda { padding: 0; margin: 0 0 var(--spacing-xs); font: var(--text-subtitle-l); color: var(--color-text-primary); }
+/* Sem explicação sob a pergunta, os cards mantêm a mesma distância que teriam com ela */
+.semAjuda .legenda { margin-bottom: calc(var(--spacing-sm) + var(--spacing-xs)); }
+.ajuda { margin: 0 0 var(--spacing-sm); max-width: 36rem; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-tertiary); }
+
+.grade { display: grid; grid-template-columns: 1fr; gap: var(--spacing-sm); }
+@media (min-width: 640px) { .grade { grid-template-columns: repeat(2, 1fr); gap: var(--spacing-md); } }
+/* Duas opções curtas ficam lado a lado a partir de telas pequenas (cabem sem apertar) */
+@media (min-width: 480px) { .duas { grid-template-columns: repeat(2, 1fr); gap: var(--spacing-sm); } }
+@media (min-width: 640px) { .duas { gap: var(--spacing-md); } }
+@media (min-width: 768px) { .tres { grid-template-columns: repeat(3, 1fr); } }
+
+/* Borda do card em cinza claro (mais suave). O indicador do rádio, dentro do card, mantém a borda mais escura: é ele que mostra que a opção é marcável */
+.card { --borda-opcao: var(--color-gray-300); }
+:global([data-theme="dark"]) .card { --borda-opcao: var(--color-gray-600); }
+.card {
+  position: relative;
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+  min-height: 2.75rem;
+  padding: var(--spacing-md) calc(var(--spacing-md) + var(--spacing-lg) + var(--spacing-sm)) var(--spacing-md) var(--spacing-md);
+  background: var(--color-bg-surface);
+  border: var(--border-width-thin) solid var(--borda-opcao);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+.card:hover { background: var(--color-bg-subtle); }
+.card:has(.input:focus-visible) { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+/* Selecionado: borda na cor da marca, em tom médio (mais suave que a cor cheia); o ponto do rádio continua na cor cheia */
+/* Erro de obrigatoriedade: borda vermelha nas opções ainda não escolhidas e a ajuda de erro abaixo */
+.grupo[data-erro='true'] .card:not(.checked) { --borda-opcao: var(--color-action-error); }
+.erro { composes: error from '../../components/FormField/FormField.module.css'; margin: var(--spacing-xs) 0 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); }
+.erroIcone { composes: msgIcon from '../../components/FormField/FormField.module.css'; }
+.checked { border-color: var(--color-brand-400); background: var(--color-bg-brand); box-shadow: inset 0 0 0 var(--border-width-thin) var(--color-brand-400); }
+.checked:hover { background: var(--color-bg-brand); }
+
+/* Rádio nativo escondido, mas focável e operável pelo teclado */
+.input { position: absolute; opacity: 0; width: 100%; height: 100%; inset: 0; margin: 0; cursor: pointer; }
+
+.icon { flex-shrink: 0; display: inline-flex; color: var(--color-text-tertiary); }
+.icon svg { width: calc(var(--spacing-lg) + var(--spacing-xs)); height: calc(var(--spacing-lg) + var(--spacing-xs)); }
+.checked .icon { color: var(--color-text-brand); }
+
+.text { display: flex; flex-direction: column; gap: var(--spacing-2xs); min-width: 0; }
+.titulo { font: var(--text-subtitle-l); color: var(--color-text-primary); }
+.desc { font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+
+/* Indicador de marcado (cor + ícone: a cor não é a única pista) */
+.mark {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-lg);
+  height: var(--spacing-lg);
+  border: var(--border-width-thin) solid var(--color-border-muted);
+  border-radius: var(--radius-full);
+  background: var(--color-bg-surface);
+}
+/* Rádio: círculo vazio quando não marcado; círculo com ponto interno quando marcado (não depende só da cor) */
+/* O ponto é desenhado no próprio fundo do círculo (um gradiente radial no centro), e não como um elemento à parte: assim ele fica sempre no centro exato do anel, mesmo com zoom ou telas de densidade quebrada (125%, 150%). A borda do ponto tem uma transição suave de meio pixel, para não ficar serrilhada. */
+.checked .mark {
+  border-color: var(--color-action-primary);
+  background: radial-gradient(circle at 50% 50%, var(--color-action-primary) 0, var(--color-action-primary) calc(var(--spacing-xs) + var(--spacing-2xs) - var(--border-width-thin) / 4), var(--color-bg-surface) calc(var(--spacing-xs) + var(--spacing-2xs) + var(--border-width-thin) / 4));
+}
+
+/* Telas largas: ícone em cima, texto embaixo */
+@media (min-width: 768px) {
+  .tres .card { flex-direction: column; align-items: flex-start; gap: var(--spacing-md); padding-right: var(--spacing-md); padding-bottom: var(--spacing-lg); }
+}
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } }

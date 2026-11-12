@@ -1,0 +1,161 @@
+.anchor { position: relative; }
+
+.trigger {
+  composes: control from '../FormField/FormField.module.css';
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  text-align: left;
+  cursor: pointer;
+}
+.open .trigger { border-color: var(--color-border-focus); box-shadow: var(--focus-glow); }
+.open .trigger[aria-invalid="true"] { box-shadow: var(--focus-glow-error); }
+
+.placeholder { color: var(--color-text-placeholder); }
+.value { display: flex; align-items: center; gap: var(--spacing-sm); min-width: 0; }
+.valueText { display: flex; align-items: baseline; gap: var(--spacing-xs); min-width: 0; }
+.valueLabel { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.valueDesc {
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+.triggerLeading, .optionLeading { display: inline-flex; flex-shrink: 0; }
+.triggerLeading { --option-leading-size: var(--spacing-lg); }
+.optionLeading { --option-leading-size: 2.5rem; }
+.chevron {
+  display: flex;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+  color: var(--color-text-tertiary);
+}
+.open .chevron { transform: rotate(180deg); }
+
+/* Fundo escurecido: só existe na folha mobile */
+.backdrop { display: none; }
+
+/* Portal no <body>: top/bottom, left e width vêm do campo (inline, via useFloatingMenu).
+   --menu-room = espaço disponível até a borda da tela no lado em que o menu abre. */
+.menu {
+  position: fixed;
+  z-index: calc(var(--z-overlay) + 1);   /* acima de Dialog e demais camadas */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--color-bg-raised);
+  border: var(--border-width-thin) solid var(--color-border-subtle);
+  border-radius: var(--radius-control);
+  box-shadow: var(--shadow-md);
+  max-height: min(15rem, max(var(--menu-room, 15rem), 8rem));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  min-height: 2.75rem;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+.optionText { display: flex; flex-direction: column; min-width: 0; }
+.optionDesc { font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+.option[data-active="true"] { background: var(--color-bg-subtle); }
+.option[aria-selected="true"] {
+  background: var(--color-bg-brand);
+  color: var(--color-text-brand);
+  font-weight: var(--font-weight-body);
+}
+
+/* Com busca: campo fixo no topo e só a lista rola */
+.menuSearchable { display: flex; flex-direction: column; overflow: hidden; }
+.list {
+  flex: 1;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.search {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-bottom: var(--border-width-thin) solid var(--color-border-subtle);
+}
+.searchIcon { flex-shrink: 0; color: var(--color-text-tertiary); }
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  min-height: 2.5rem;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+}
+.searchInput::placeholder { color: var(--color-text-placeholder); }
+
+/* Lista vazia / busca sem resultado */
+.empty { margin: 0; padding: var(--spacing-md); font-size: var(--font-size-sm); color: var(--color-text-tertiary); }
+.empty:has(.emptyIcon) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding-block: calc(var(--spacing-sm) + var(--spacing-xs));
+  text-align: center;
+}
+.emptyAction { display: block; }
+.emptyIcon { display: flex; color: var(--color-text-tertiary); }
+
+/* ── Compacto (filtros de tabela): 36px visíveis, texto Body/S; a área clicável de 44px é mantida por um pseudo-elemento ── */
+.triggerSm {
+  position: relative;
+  min-height: calc(var(--control-height-md) - var(--spacing-sm));
+  padding-block: 0;
+  padding-inline: var(--spacing-sm);
+  font: var(--text-body-s);
+  letter-spacing: var(--text-body-s-tracking);
+}
+.triggerSm::after { content: ""; position: absolute; inset: calc(var(--spacing-xs) * -1) 0; }
+
+/* ── Mobile (≤ 640px = --breakpoint-sm): folha inferior ───────────────── */
+@media (max-width: 640px) {
+  .trigger { min-height: 2.75rem; }
+
+  .backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-overlay);
+    background: var(--color-overlay);
+  }
+
+  .menu[data-placement="sheet"] {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    max-height: 60vh;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    border: none;
+    border-radius: var(--radius-overlay) var(--radius-overlay) 0 0;
+    box-shadow: var(--shadow-2xl);
+  }
+
+  .option { min-height: 3rem; font-size: var(--font-size-lg); }
+}

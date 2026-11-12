@@ -1,0 +1,17 @@
+/* Composição do hero: documento em destaque e cartões translúcidos com ícones. Só tokens. */
+/* ─── Composição de cartões translúcidos ─── */
+.palco { --meio-doc: 7rem; position: relative; isolation: isolate; min-height: 22rem; }
+@media (min-width: 1024px) { .palco { --meio-doc: 9rem; min-height: 28rem; } }
+.cartao { position: absolute; display: flex; align-items: center; justify-content: center; background: color-mix(in srgb, var(--color-bg-surface) 72%, transparent); backdrop-filter: blur(var(--spacing-sm)); -webkit-backdrop-filter: blur(var(--spacing-sm)); border: var(--border-width-thin) solid color-mix(in srgb, var(--color-bg-surface) 55%, var(--color-border-subtle)); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); animation: flutuar 7s ease-in-out infinite; }
+.documento { top: calc(2% + var(--spacing-sm) + var(--spacing-xs)); left: 50%; width: 14rem; height: 18rem; margin-left: -7rem; padding: var(--spacing-sm); transform: rotate(-4deg); }
+@media (min-width: 1024px) { .documento { width: 18rem; height: 22rem; margin-left: -9rem; padding: var(--spacing-md); } }
+.documento > * { width: 100%; height: 100%; }
+.icone { width: 3.5rem; height: 3.5rem; border-radius: var(--radius-md); }
+.verde { top: calc(6% + var(--spacing-sm) + var(--spacing-xs)); left: calc(50% + var(--meio-doc) - var(--spacing-lg)); transform: rotate(8deg); color: var(--color-text-brand); background: color-mix(in srgb, var(--color-bg-brand) 80%, transparent); animation-delay: -1.5s; }
+.azul { bottom: 10%; right: calc(50% + var(--meio-doc) - var(--spacing-lg)); transform: rotate(-7deg); color: var(--color-text-brand); background: color-mix(in srgb, var(--color-bg-brand) 80%, transparent); animation-delay: -3s; }
+.amarelo { bottom: 14%; left: calc(50% + var(--meio-doc) - var(--spacing-lg)); transform: rotate(5deg); color: var(--color-text-brand); background: color-mix(in srgb, var(--color-bg-brand) 80%, transparent); animation-delay: -4.5s; }
+@keyframes flutuar { 0%, 100% { translate: 0 0; } 50% { translate: 0 calc(var(--spacing-sm) * -1); } }
+@media (prefers-reduced-motion: reduce) { .cartao { animation: none; } }
+
+/* brilho verde discreto atrás da composição (versão 3): só o verde da marca, bem suave, que some nas bordas */
+.brilho::before { content: ''; position: absolute; inset: -12% -8%; z-index: -1; pointer-events: none; background: radial-gradient(ellipse at 50% 50%, color-mix(in srgb, var(--color-brand-300) 26%, transparent) 0, color-mix(in srgb, var(--color-brand-200) 12%, transparent) 45%, transparent 72%); }

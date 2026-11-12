@@ -1,0 +1,21 @@
+/* Tela 1.1: tipo de locação e de imóvel. Só tokens. */
+.pagina { display: flex; flex-direction: column; gap: var(--spacing-xl); max-width: 48rem; }
+
+.intro { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.h1 { margin: 0; font: var(--text-heading-6); letter-spacing: var(--text-heading-6-tracking); color: var(--color-text-primary); text-wrap: balance; }
+@media (min-width: 768px)  { .h1 { font: var(--text-heading-5); letter-spacing: var(--text-heading-5-tracking); } }
+.lead { margin: 0; max-width: 36rem; font: var(--text-body-m); letter-spacing: var(--text-body-m-tracking); color: var(--color-text-secondary); }
+
+/* Botão à direita (largura toda no celular), com a dica à esquerda enquanto faltam escolhas */
+.acoes { display: flex; flex-direction: column-reverse; gap: var(--spacing-sm); padding-top: var(--spacing-md); border-top: var(--border-width-thin) solid var(--color-border-subtle); }
+.acoes > button { width: 100%; }
+.dica { margin: 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-tertiary); text-align: center; }
+@media (min-width: 640px) {
+  .acoes { flex-direction: row; align-items: center; justify-content: flex-end; gap: var(--spacing-md); }
+  .acoes > button { width: auto; }
+  .dica { text-align: right; }
+}
+
+/* Jeito de conversa: a segunda pergunta entra suavemente depois da primeira resposta */
+.aparece { animation: aparecer var(--transition-normal) both; }
+@keyframes aparecer { from { opacity: 0; transform: translateY(var(--spacing-sm)); } to { opacity: 1; transform: none; } }

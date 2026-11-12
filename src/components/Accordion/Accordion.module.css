@@ -1,0 +1,81 @@
+.accordion { width: 100%; display: flex; flex-direction: column; gap: var(--spacing-xs); }
+
+.item {
+  border: var(--border-width-thin) solid var(--color-border-subtle);
+  border-radius: var(--radius-control);
+  overflow: hidden;
+  background: var(--color-bg-surface);
+  box-shadow: var(--shadow-xs);
+}
+
+.heading { margin: 0; font-size: inherit; }
+
+.trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-heading);
+  color: var(--color-text-primary);
+  text-align: left;
+  transition: background-color var(--transition-fast);
+  gap: var(--spacing-sm);
+}
+.trigger:hover { background: var(--color-bg-subtle); }
+.trigger:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: calc(var(--focus-ring-width) * -1);
+}
+
+.chevron {
+  display: flex;
+  flex-shrink: 0;
+  transition: transform var(--transition-normal);
+  color: var(--color-text-tertiary);
+}
+.open .chevron { transform: rotate(180deg); }
+
+.titleRow { display: inline-flex; align-items: center; gap: var(--spacing-xs); }
+.icon { display: inline-flex; flex-shrink: 0; color: var(--color-text-brand); }
+.heads { display: flex; flex-direction: column; gap: var(--spacing-2xs); min-width: 0; }
+.subtitle { font-family: var(--font-body); font-size: var(--font-size-sm); font-weight: var(--font-weight-body); color: var(--color-text-tertiary); overflow-wrap: anywhere; }
+
+.end { display: flex; align-items: center; flex-shrink: 0; gap: var(--spacing-sm); margin-left: var(--spacing-md); }
+.meta { display: inline-flex; align-items: center; gap: var(--spacing-xs); font-family: var(--font-body); font-size: var(--font-size-sm); font-weight: var(--font-weight-body); color: var(--color-text-tertiary); white-space: nowrap; }
+
+/* Fechado: visibility:hidden tira o conteúdo da ordem de tabulação e dos leitores de tela */
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows var(--transition-normal), visibility 0s linear var(--transition-normal);
+}
+.open .panel {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition-delay: 0s;
+}
+.panelInner { overflow: hidden; min-height: 0; }
+
+.content {
+  padding: 0 var(--spacing-md) var(--spacing-md);
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+/* Variante "lines": só linhas divisórias entre os itens, sem caixa, sombra nem fundo */
+.lines { gap: 0; }
+.lines .item { border: 0; border-bottom: var(--border-width-thin) solid var(--color-border-subtle); border-radius: 0; background: none; box-shadow: none; }
+.lines .item:last-child { border-bottom: 0; }
+.lines .trigger { padding: var(--spacing-md) 0; }
+.lines .trigger:hover { background: none; }
+.lines .trigger:hover .heads { color: var(--color-text-brand); }
+.lines .content { padding: 0 0 var(--spacing-md); }
+.lines .tight.open .trigger { padding-bottom: var(--spacing-sm); }

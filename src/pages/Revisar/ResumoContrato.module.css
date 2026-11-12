@@ -1,0 +1,36 @@
+/* Tela 2.1: revisão do contrato. Só tokens. O painel em si está em PainelContrato.module.css. */
+.pagina { display: flex; flex-direction: column; gap: var(--spacing-xl); max-width: 48rem; margin-inline: auto; }
+
+.intro { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.h1 { margin: 0; font: var(--text-heading-6); letter-spacing: var(--text-heading-6-tracking); color: var(--color-text-primary); text-wrap: balance; }
+@media (min-width: 768px)  { .h1 { font: var(--text-heading-5); letter-spacing: var(--text-heading-5-tracking); } }
+.lead { margin: 0; max-width: 36rem; font: var(--text-body-m); letter-spacing: var(--text-body-m-tracking); color: var(--color-text-secondary); }
+
+/* Convite para compartilhar o resumo */
+.compartilhar { display: flex; flex-direction: column; gap: var(--spacing-md); padding: var(--spacing-md); background: var(--color-bg-subtle); border: var(--border-width-thin) solid var(--color-border-subtle); border-radius: var(--radius-md); }
+.compartilhar > button { width: 100%; }
+.compartilharTexto { display: flex; flex-direction: column; gap: var(--spacing-2xs); }
+.compartilharTitulo { margin: 0; font: var(--text-subtitle-m); letter-spacing: var(--text-subtitle-m-tracking); color: var(--color-text-primary); }
+.compartilharAjuda { margin: 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+@media (min-width: 640px) {
+  .compartilhar { flex-direction: row; align-items: center; justify-content: space-between; }
+  .compartilhar > button { width: auto; flex-shrink: 0; }
+}
+
+/* Janela de personalizar um ponto: alternativas em cards e, em "Outro", o campo de texto */
+.opcoesPonto { display: flex; flex-direction: column; gap: var(--spacing-lg); }
+
+.acoes { display: flex; flex-direction: column-reverse; gap: var(--spacing-sm); padding-top: var(--spacing-md); border-top: var(--border-width-thin) solid var(--color-border-subtle); }
+.acoes > button { width: 100%; }
+@media (min-width: 640px) {
+  .acoes { flex-direction: row; align-items: center; justify-content: space-between; }
+  .acoes > button { width: auto; }
+}
+
+/* Barra de ações fixa no pé da tela, só no celular (a revisão é longa e o botão de seguir precisa ficar à vista). Do tablet para cima, a barra é a normal. */
+@media (max-width: 767px) {
+  .acoes { position: sticky; bottom: 0; z-index: var(--z-sticky, 10); margin-inline: calc(var(--spacing-md) * -1); padding: var(--spacing-md); background: var(--color-bg-surface); border-top: var(--border-width-thin) solid var(--color-border-subtle); box-shadow: var(--shadow-md); }
+}
+
+/* Quando vem pelo link: quantos dias o resumo ainda fica guardado (texto simples, sem caixa) */
+.prazo { margin: 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); font-weight: var(--font-weight-label); color: var(--color-text-secondary); }

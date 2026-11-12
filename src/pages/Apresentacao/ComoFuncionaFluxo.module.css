@@ -1,0 +1,82 @@
+/* Fluxo visual do "Como funciona": linha do tempo vertical com nó, texto e mini-visual por etapa. Só tokens. */
+.flow { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: calc(var(--spacing-xl) + var(--spacing-sm)) minmax(0, 1fr);
+  column-gap: var(--spacing-md);
+  padding-bottom: var(--spacing-lg);
+}
+.step:last-child { padding-bottom: 0; }
+
+/* Linha que liga um nó ao próximo */
+.step::before {
+  content: '';
+  position: absolute;
+  top: calc(var(--spacing-xl) + var(--spacing-sm) + var(--spacing-xs));
+  bottom: var(--spacing-xs);
+  left: calc(var(--spacing-md) + var(--spacing-2xs));
+  width: var(--spacing-xs);
+  border-radius: var(--radius-full);
+  background: var(--color-brand-100);
+}
+.step:last-child::before { display: none; }
+
+/* Nó da etapa: círculo com o ícone */
+.node {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--spacing-xl) + var(--spacing-sm));
+  height: calc(var(--spacing-xl) + var(--spacing-sm));
+  border-radius: var(--radius-full);
+  background: var(--color-bg-brand);
+  color: var(--color-text-brand);
+  border: var(--spacing-2xs) solid var(--color-brand-200);
+}
+
+.body { display: flex; flex-direction: column; gap: var(--spacing-2xs); min-width: 0; }
+.kicker { margin: 0; font: var(--text-caption-s); font-weight: var(--font-weight-label); letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-brand); }
+.title { margin: 0; font-family: var(--font-display); font-size: var(--font-size-base); font-weight: var(--font-weight-heading); line-height: var(--line-height-snug); color: var(--color-text-primary); }
+.text { margin: 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+
+/* Mini-visual da etapa */
+.visual { margin-top: var(--spacing-sm); padding: var(--spacing-md); background: var(--color-bg-subtle); border-radius: var(--radius-md); }
+.visualInner { display: flex; flex-direction: column; gap: var(--spacing-sm); margin: 0; padding: 0; list-style: none; }
+
+/* 1 · Campo e escolha rápida */
+.labelBar { display: block; height: var(--spacing-xs); width: 32%; border-radius: var(--radius-xs); background: var(--color-border-muted); }
+.input { display: flex; align-items: center; height: var(--spacing-xl); padding: 0 var(--spacing-md); background: var(--color-bg-surface); border: var(--border-width-thin) solid var(--color-border-muted); border-radius: var(--radius-control); }
+.inputText { display: block; height: var(--spacing-xs); width: 48%; border-radius: var(--radius-xs); background: var(--color-border-disabled); }
+.chips { display: flex; gap: var(--spacing-sm); }
+
+/* 2 · Resumo conferido */
+.checks li { display: flex; align-items: center; gap: var(--spacing-sm); }
+.checks svg { flex-shrink: 0; color: var(--color-text-brand); }
+.bar { display: block; height: var(--spacing-xs); border-radius: var(--radius-xs); background: var(--color-border-disabled); }
+
+/* 3 · Formas de pagamento */
+.tiles { flex-direction: row; }
+.tile {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  height: var(--spacing-2xl);
+  background: var(--color-bg-surface);
+  border: var(--border-width-thin) solid var(--color-border-muted);
+  border-radius: var(--radius-control);
+  font: var(--text-subtitle-s);
+  color: var(--color-text-secondary);
+}
+.tileOn { border-color: var(--color-action-primary); background: var(--color-bg-brand); color: var(--color-text-brand); }
+
+/* 4 · PDF pronto para baixar */
+.pdf { flex-direction: row; align-items: center; gap: var(--spacing-md); }
+.page { display: flex; flex-direction: column; gap: var(--spacing-xs); width: 3.5rem; height: 4.5rem; padding: var(--spacing-xs); background: var(--color-bg-surface); border: var(--border-width-thin) solid var(--color-border-card); border-radius: var(--radius-xs); box-shadow: var(--shadow-sm); }
+.pageBand { display: block; height: var(--spacing-xs); width: 60%; border-radius: var(--radius-xs); background: var(--color-action-primary); }
+.pageLine { display: block; height: var(--spacing-2xs); border-radius: var(--radius-xs); background: var(--color-border-disabled); }
+.pageLineShort { display: block; height: var(--spacing-2xs); width: 60%; border-radius: var(--radius-xs); background: var(--color-border-disabled); }
+.download { margin-left: auto; display: inline-flex; align-items: center; justify-content: center; width: calc(var(--spacing-xl) + var(--spacing-sm)); height: calc(var(--spacing-xl) + var(--spacing-sm)); border-radius: var(--radius-full); background: var(--color-action-primary); color: var(--color-on-action-primary); }

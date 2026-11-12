@@ -1,0 +1,136 @@
+/* Estilos das telas de finalização (3.1 a 5.2). Só tokens. */
+
+/* Escolha do estilo: cada opção é um rádio com uma prévia borrada da página */
+.estilos { scroll-margin-top: calc(var(--spacing-2xl) + var(--spacing-lg)); border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-direction: column; gap: var(--spacing-xs); }
+.legenda { padding: 0; margin: 0 0 var(--spacing-xs); font: var(--text-subtitle-l); color: var(--color-text-primary); }
+.grade { margin-top: var(--spacing-xs); /* o espaço de 4px da coluna + 4px = 8px do subtítulo aos cards */ display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--spacing-md); }
+@media (min-width: 640px) { .grade { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* O card de estilo usa a mesma borda dos cards de opção (cinza claro) e o mesmo estado marcado (borda na cor da marca) */
+.estilo { --borda-opcao: var(--color-gray-300); position: relative; display: flex; flex-direction: column; gap: 0; padding: 0; overflow: hidden; background: var(--color-bg-surface); border: var(--border-width-thin) solid var(--borda-opcao); border-radius: var(--radius-md); transition: background-color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast); }
+/* O corpo do card (desenho, nome, descrição e valor) é o rótulo do radio; o botão "Ver prévia" fica dentro do card, fora do rótulo */
+.estiloCorpo { flex: 1; display: flex; flex-direction: column; gap: 0; cursor: pointer; }
+/* o desenho vai de ponta a ponta do card; o texto fica com margem própria */
+.estiloTexto { flex: 1; display: flex; flex-direction: column; gap: var(--spacing-xs); padding: var(--spacing-md) var(--spacing-md) 0; }
+:global([data-theme="dark"]) .estilo { --borda-opcao: var(--color-gray-600); }
+.estilo:hover { background: var(--color-bg-subtle); }
+/* a borda extra do selecionado fica por fora do card: por dentro, o desenho de ponta a ponta a cobriria e a borda ficaria mais fina em cima */
+.estilo:has(.radio:checked) { border-color: var(--color-brand-400); background: var(--color-bg-brand); box-shadow: 0 0 0 var(--border-width-thin) var(--color-brand-400); }
+.estilo:has(.radio:focus-visible) { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.radio { position: absolute; opacity: 0; inset: 0; margin: 0; pointer-events: none; }
+.estiloTitulo { font: var(--text-subtitle-m); letter-spacing: var(--text-subtitle-m-tracking); color: var(--color-text-primary); }
+.estiloDesc { font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+/* Valor do estilo, no pé do card */
+.estiloPreco { margin-top: var(--spacing-xs); padding-top: var(--spacing-sm); border-top: var(--border-width-thin) solid var(--color-border-subtle); font: var(--text-subtitle-l); font-weight: var(--font-weight-heading); letter-spacing: var(--text-subtitle-l-tracking); color: var(--color-text-primary); }
+
+/* Desenho de cada estilo: uma "folha" só com formas (sem desfoque; o texto oculto fica na janela "Ver prévia") */
+.previa { display: flex; flex-direction: column; gap: var(--spacing-xs); height: 9rem; padding: var(--spacing-md); background: var(--color-bg-default); border-bottom: var(--border-width-thin) solid var(--color-border-subtle); overflow: hidden; }
+.linhaTexto { display: block; height: var(--spacing-xs); width: 100%; background: var(--color-text-tertiary); border-radius: var(--radius-full); opacity: 0.5; }
+.linhaCurta { display: block; height: var(--spacing-xs); width: 40%; background: var(--color-text-tertiary); border-radius: var(--radius-full); opacity: 0.5; }
+
+/* Clássico: título centralizado e texto corrido, denso */
+.previaClassico { gap: var(--spacing-2xs); }
+.cTitulo { display: block; align-self: center; height: var(--spacing-sm); width: 56%; background: var(--color-text-primary); border-radius: var(--radius-full); opacity: 0.6; }
+.cSub { display: block; align-self: center; height: var(--spacing-xs); width: 32%; margin-bottom: var(--spacing-xs); background: var(--color-text-tertiary); border-radius: var(--radius-full); opacity: 0.5; }
+.cSecao { display: block; align-self: center; height: var(--spacing-xs); width: 28%; margin-block: var(--spacing-xs); background: var(--color-text-secondary); border-radius: var(--radius-full); opacity: 0.6; }
+.previaClassico .linhaTexto { height: var(--spacing-xs); }
+
+/* Moderno: título com marca, blocos com ícone (um em destaque), quadro de destaque e texto curto */
+.previaModerno { gap: var(--spacing-sm); }
+.mCabeca { display: flex; align-items: center; gap: var(--spacing-sm); }
+.mMarca { flex-shrink: 0; width: var(--spacing-lg); height: var(--spacing-lg); background: var(--color-bg-brand-strong); border-radius: var(--radius-control-sm); }
+.mBarras { display: flex; flex-direction: column; gap: var(--spacing-xs); flex: 1; min-width: 0; }
+.mBarraForte { display: block; height: var(--spacing-sm); width: 70%; background: var(--color-text-primary); border-radius: var(--radius-full); opacity: 0.6; }
+.mBarraSuave { display: block; height: var(--spacing-xs); width: 44%; background: var(--color-text-tertiary); border-radius: var(--radius-full); opacity: 0.5; }
+.mBlocos { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-xs); }
+.mBloco { display: inline-flex; align-items: center; justify-content: center; height: var(--spacing-xl); background: var(--color-bg-subtle); border-radius: var(--radius-control-sm); color: var(--color-text-tertiary); }
+.mDestaque { background: var(--color-bg-brand); color: var(--color-text-brand); }
+.mCallout { display: flex; align-items: center; gap: var(--spacing-xs); padding: var(--spacing-xs) var(--spacing-sm); background: var(--color-bg-brand); border-left: var(--spacing-xs) solid var(--color-action-primary); border-radius: var(--radius-control-sm); color: var(--color-text-brand); }
+.mLinhas { display: flex; flex-direction: column; gap: var(--spacing-2xs); flex: 1; }
+
+/* Minimalista: título fino, uma linha divisória e seções com muito espaço em volta */
+.previaMinimalista { gap: var(--spacing-sm); padding: var(--spacing-lg) var(--spacing-md); }
+.minTitulo { display: block; height: var(--spacing-xs); width: 38%; background: var(--color-text-primary); border-radius: var(--radius-full); opacity: 0.6; }
+.minRegua { display: block; height: var(--border-width-thin); width: 100%; background: var(--color-border-subtle); }
+.minSecao { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+.minTituloSecao { display: block; height: var(--spacing-xs); width: 24%; margin-bottom: var(--spacing-2xs); background: var(--color-text-secondary); border-radius: var(--radius-full); opacity: 0.6; }
+
+/* Pagamento: resumo do pedido */
+.pedido { display: flex; flex-direction: column; gap: var(--spacing-sm); padding: var(--spacing-md); background: var(--color-bg-subtle); border: var(--border-width-thin) solid var(--color-border-subtle); border-radius: var(--radius-md); }
+.pedidoLinha { display: flex; align-items: baseline; justify-content: space-between; gap: var(--spacing-md); }
+.pedidoNome { margin: 0; font: var(--text-subtitle-m); letter-spacing: var(--text-subtitle-m-tracking); color: var(--color-text-primary); }
+.pedidoDesc { margin: 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+.preco { margin: 0; font: var(--text-heading-6); font-family: var(--font-display); letter-spacing: var(--text-heading-6-tracking); color: var(--color-text-primary); white-space: nowrap; }
+
+/* Janela do serviço de pagamento (simulada) */
+.gateway { display: flex; flex-direction: column; gap: var(--spacing-md); }
+.pix { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-md); border: var(--border-width-thin) dashed var(--color-border-default); border-radius: var(--radius-md); text-align: center; }
+.qr { width: 10rem; height: 10rem; display: grid; place-items: center; background: var(--color-bg-subtle); border-radius: var(--radius-sm); color: var(--color-text-tertiary); }
+.processando { display: flex; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-md); font: var(--text-body-m); color: var(--color-text-secondary); }
+
+/* Tela 5.1: contrato gerado. O cartão do documento reúne baixar e enviar; "criar novo contrato" fica numa área separada. */
+.sucesso { max-width: 36rem; }
+.sucessoTopo { gap: var(--spacing-sm); }
+/* --recuo: distância do conteúdo até a borda do cartão; o ícone do PDF usa ela para ficar concêntrico com o canto do cartão */
+.documento { --recuo: var(--spacing-md); display: flex; flex-direction: column; gap: var(--spacing-md); padding: var(--spacing-lg) var(--spacing-md); background: var(--color-bg-surface); border: var(--border-width-thin) solid var(--color-border-subtle); border-radius: var(--radius-lg); }
+@media (min-width: 640px) { .documento { --recuo: var(--spacing-lg); padding: var(--spacing-lg); } }
+.arquivo { display: flex; align-items: center; gap: var(--spacing-md); padding-bottom: var(--spacing-md); border-bottom: var(--border-width-thin) solid var(--color-border-subtle); }
+.pdfIcone { position: relative; flex-shrink: 0; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--spacing-2xs); width: var(--spacing-3xl); height: var(--spacing-3xl); background: var(--color-bg-brand); border-radius: max(calc(var(--radius-lg) - var(--recuo) + var(--spacing-xs)), var(--radius-sm)); color: var(--color-text-brand); }
+.pdfRotulo { font: var(--text-caption-s); font-weight: var(--font-weight-label); letter-spacing: var(--text-caption-s-tracking); }
+.arquivoTexto { display: flex; flex-direction: column; align-items: flex-start; gap: var(--spacing-2xs); min-width: 0; }
+.arquivoNome { margin: 0; font: var(--text-subtitle-m); letter-spacing: var(--text-subtitle-m-tracking); color: var(--color-text-primary); overflow-wrap: anywhere; }
+.arquivoMeta { margin: 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+.acoesDoc { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.acoesDoc > button { width: 100%; }
+.seta { transition: transform var(--transition-fast); }
+.setaAberta { transform: rotate(180deg); }
+.canais { display: flex; flex-direction: column; gap: var(--spacing-xs); padding: var(--spacing-md); background: var(--color-bg-subtle); border-radius: var(--radius-md); }
+.canais[hidden] { display: none; }
+.canaisBotoes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--spacing-sm); }
+.novo { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-2xs); padding-top: var(--spacing-lg); border-top: var(--border-width-thin) solid var(--color-border-subtle); text-align: center; }
+.novoTexto { margin: 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-tertiary); }
+
+/* Antes de pagar: a orientação é só texto, sem fundo nem borda de alerta */
+.textoInfo { margin: calc(var(--spacing-sm) * -1) 0 0; /* a seção deixa 16px entre os itens; o texto fica a 8px do título */ max-width: 36rem; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+/* Aceite dos Termos de uso, separado da confirmação por uma linha, e o link da política de privacidade logo abaixo */
+.aceite { display: flex; flex-direction: column; gap: var(--spacing-sm); padding-top: var(--spacing-lg); border-top: var(--border-width-thin) solid var(--color-border-subtle); }
+/* Link dentro do texto do aceite que abre a janela do documento */
+.linkBotao { display: inline; min-height: var(--spacing-lg); padding: 0; background: none; border: 0; font: inherit; font-weight: var(--font-weight-label); color: var(--color-text-brand); text-decoration: underline; text-underline-offset: var(--spacing-2xs); cursor: pointer; }
+.linkBotao:hover { color: var(--color-action-primary-hover, var(--color-text-brand)); }
+.linkBotao:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); border-radius: var(--radius-sm); }
+/* "Ver prévia" no card: link com ícone, centralizado */
+.linkPrevia { display: inline-flex; align-items: center; justify-content: center; gap: var(--spacing-xs); align-self: center; min-height: var(--spacing-xl); margin-block: var(--spacing-sm) var(--spacing-md); }
+.documentoLegal { display: flex; flex-direction: column; gap: var(--spacing-md); }
+.documentoTitulo { margin: 0 0 var(--spacing-xs); font: var(--text-subtitle-m); font-weight: var(--font-weight-heading); color: var(--color-text-primary); }
+.documentoTexto { margin: 0; font: var(--text-body-m); color: var(--color-text-secondary); }
+
+/* Nenhum estilo escolhido depois de tentar seguir: as bordas dos cards e a mensagem ficam na cor de erro */
+.estilos[data-invalido='true'] .estilo { --borda-opcao: var(--color-action-error); }
+.erroEstilo { composes: error from '../../components/FormField/FormField.module.css'; margin: var(--spacing-xs) 0 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); }
+.erroIcone { composes: msgIcon from '../../components/FormField/FormField.module.css'; }
+
+
+/* Pagamento: avisos em texto simples, sem caixa */
+/* Modal de envio do PDF (5.2): nome, canais e só os contatos dos canais marcados */
+.envio { display: flex; flex-direction: column; gap: var(--spacing-md); }
+.envioCanais { display: flex; flex-direction: column; gap: var(--spacing-sm); margin: 0; padding: 0; border: 0; min-width: 0; }
+.envioCanaisLegenda { padding: 0; margin-bottom: var(--spacing-sm); font: var(--text-body-m); font-weight: var(--font-weight-label); color: var(--color-text-primary); }
+.nota { margin: 0; max-width: 36rem; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-tertiary); }
+.nota strong { font-weight: var(--font-weight-label); color: var(--color-text-primary); }
+
+/* 5.1: PDF sendo gerado */
+.gerando { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-lg) 0; }
+.gerandoTexto { margin: 0; font: var(--text-body-m); letter-spacing: var(--text-body-m-tracking); color: var(--color-text-secondary); }
+
+.notas { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+
+/* Pagamento: informações compactas, com título discreto e texto simples (sem cards) */
+.infos { display: flex; flex-direction: column; gap: var(--spacing-md); margin: 0; }
+.info { display: flex; flex-direction: column; gap: var(--spacing-2xs); margin: 0; }
+.infoTitulo { margin: 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); font-weight: var(--font-weight-label); color: var(--color-text-primary); }
+.infoTexto { margin: 0; max-width: 36rem; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+
+/* Resumo executivo (linha do cartão do PDF) e aviso de guarda, abaixo do cartão */
+.arquivoResumo { margin: 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+.guarde { display: flex; align-items: flex-start; gap: var(--spacing-sm); }
+.guardeIcone { flex-shrink: 0; margin-top: var(--spacing-2xs); color: var(--color-text-tertiary); }

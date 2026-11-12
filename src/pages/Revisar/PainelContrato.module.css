@@ -1,0 +1,65 @@
+/* Painel com tudo o que vai no contrato: cada assunto tem uma etiqueta e, embaixo, as frases ligadas por uma linha. Só tokens. */
+.painel { display: flex; flex-direction: column; gap: var(--spacing-xl); padding: var(--spacing-lg) var(--spacing-md); background: var(--color-bg-surface); border: var(--border-width-thin) solid var(--color-border-subtle); border-radius: var(--radius-lg); }
+@media (min-width: 640px) { .painel { padding: var(--spacing-xl); } }
+.painelTopo { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+.h2 { margin: 0; font: var(--text-subtitle-xl); font-family: var(--font-display); font-weight: var(--font-weight-heading); letter-spacing: var(--text-subtitle-xl-tracking); color: var(--color-text-primary); }
+.painelSub { margin: 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+.legenda { margin: 0; display: flex; flex-wrap: wrap; gap: var(--spacing-xs); }
+
+.grupo { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.grupoTopo { display: flex; align-items: center; gap: var(--spacing-md); flex-wrap: wrap; }
+.pilula { margin: 0; display: inline-flex; align-items: center; gap: var(--spacing-xs); padding: var(--spacing-xs) var(--spacing-md); background: var(--color-bg-brand); border-radius: var(--radius-full); font: var(--text-caption-m); font-weight: var(--font-weight-heading); letter-spacing: var(--text-caption-m-tracking); text-transform: uppercase; color: var(--color-text-brand); }
+/* Em maiúsculas o texto parece mais alto na linha: o ícone sobe para ficar no centro visual das letras (o peso dos ícones fica mais embaixo) */
+.pilula svg { flex-shrink: 0; transform: translateY(calc(var(--spacing-2xs) * -1)); }
+.atencao { font: var(--text-caption-m); font-weight: var(--font-weight-label); color: var(--color-status-warning-text, var(--color-text-primary)); }
+.aviso { margin: 0; max-width: 36rem; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+
+/* Linha vertical à esquerda, com um traço saindo da primeira linha de cada item (o texto de várias linhas continua embaixo do traço).
+   O botão de editar (44) fica no alto do item e o texto é centralizado com ele; cada item tem 4 de espaço acima e abaixo, então
+   há pelo menos 8 entre um botão e o seguinte (4 + 4), mesmo quando o texto cabe em uma linha só. */
+.lista { list-style: none; margin: 0 0 0 var(--spacing-md); padding: 0; display: flex; flex-direction: column; }
+.item { --pad: var(--spacing-xs); --topo-texto: calc(var(--spacing-sm) + var(--spacing-2xs)); --meia-linha: calc(var(--topo-texto) + 0.75rem); position: relative; display: flex; align-items: flex-start; justify-content: space-between; gap: var(--spacing-md); padding: var(--pad) 0 var(--pad) var(--spacing-md); }
+.item::before { content: ''; position: absolute; left: 0; top: calc(var(--pad) + var(--meia-linha)); width: var(--spacing-md); border-top: var(--border-width-thin) solid var(--color-brand-300); }
+/* a linha vertical é desenhada por item, e no último ela para no traço dele (não continua abaixo) */
+.item::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; border-left: var(--border-width-thin) solid var(--color-brand-300); }
+.item:last-child::after { bottom: auto; height: calc(var(--pad) + var(--meia-linha)); }
+.item > button:not(.linha) { flex-shrink: 0; }
+.item > p, .item > div.itemTexto { padding-block: var(--topo-texto); padding-left: var(--spacing-sm); }
+/* A linha toda é o botão de editar (ou de personalizar): o lápis só indica a ação. O texto fica alinhado com o traço da árvore. */
+.linha { flex: 1; min-width: 0; min-height: 2.75rem; display: flex; align-items: flex-start; justify-content: space-between; gap: var(--spacing-md); padding: var(--topo-texto) var(--spacing-sm); background: none; border: 0; border-radius: var(--radius-control); font: inherit; text-align: left; color: inherit; cursor: pointer; transition: background-color var(--transition-fast); }
+.linha:hover { background: var(--color-bg-subtle); }
+.linha:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.lapis { flex-shrink: 0; margin-top: var(--spacing-xs); color: var(--color-text-tertiary); }
+.linha:hover .lapis { color: var(--color-text-brand); }
+.linha .frase { display: block; }
+.itemTexto { display: flex; flex: 1; flex-direction: column; gap: var(--spacing-2xs); min-width: 0; }
+.rotulo { display: flex; align-items: center; gap: var(--spacing-xs); flex-wrap: wrap; font: var(--text-subtitle-s); letter-spacing: var(--text-subtitle-s-tracking); color: var(--color-text-primary); }
+.frase { margin: 0; font: var(--text-body-m); letter-spacing: var(--text-body-m-tracking); color: var(--color-text-secondary); overflow-wrap: anywhere; }
+.falta { display: flex; align-items: flex-start; gap: var(--spacing-xs); margin: 0;font: var(--text-body-m); letter-spacing: var(--text-body-m-tracking); font-weight: var(--font-weight-label); color: var(--color-text-primary); }
+
+/* ícone de atenção (âmbar, não vermelho: é algo a completar, não um erro) */
+.faltaIcone { flex-shrink: 0; color: var(--color-status-warning-fg); }
+
+/* Subdivisões do modelo padrão (uso e convivência, reparos, fim do contrato): cada uma com o seu título e a sua linha */
+.subgrupo { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+.subgrupo + .subgrupo { margin-top: var(--spacing-md); }
+/* o primeiro subtítulo ("Uso e convivência") não cola no texto de apoio */
+.aviso + .subgrupo { margin-top: var(--spacing-md); }
+.subtitulo { margin: 0; display: flex; align-items: baseline; gap: var(--spacing-sm); font: var(--text-subtitle-m); font-weight: var(--font-weight-heading); letter-spacing: var(--text-subtitle-m-tracking); color: var(--color-text-primary); }
+.contagem { font: var(--text-caption-m); font-weight: var(--font-weight-body); letter-spacing: var(--text-caption-m-tracking); color: var(--color-text-tertiary); }
+
+/* Modo de seleção: o checkbox fica na linha da informação e a linha toda é a área de toque. A marcada ganha fundo suave. */
+.item > .selecao { flex: 1; min-width: 0; }
+.selecao > div, .selecao label { display: flex; width: 100%; }
+.selecao label { align-items: flex-start; gap: var(--spacing-sm); padding: var(--topo-texto) var(--spacing-sm); border-radius: var(--radius-control); transition: background-color var(--transition-fast); }
+.selecao label > span:first-of-type { margin-top: calc(var(--spacing-xs) / 2); }
+.selecao label:hover { background: var(--color-bg-subtle); }
+.selecao label:focus-within { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.selecao.marcado label { background: var(--color-bg-brand); }
+.selecao.marcado .frase { color: var(--color-text-primary); }
+
+/* Com o convite para selecionar logo abaixo das etiquetas, a lista fica mais perto dele */
+.painelComConvite { gap: var(--spacing-md); }
+
+/* Comentar só um ponto: botão pequeno no fim da linha, alinhado à primeira linha do texto */
+.item > .comentar { margin-top: var(--spacing-sm); }

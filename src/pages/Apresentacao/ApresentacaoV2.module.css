@@ -1,0 +1,74 @@
+/* Tela 0, versão 2: hero colorido com detalhes de tipografia. Só tokens. As cores de fundo usam tokens semânticos (que mudam no tema escuro). */
+
+.hero {
+  --margem-x: var(--spacing-md);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--color-bg-default);
+}
+@media (min-width: 768px)  { .hero { --margem-x: var(--spacing-lg); } }
+@media (min-width: 1024px) { .hero { --margem-x: var(--spacing-xl); } }
+/* mesma largura e margens laterais do resto da página; pouco espaço em cima, para o conteúdo subir */
+.heroInterno { width: 100%; max-width: calc(72rem + var(--margem-x) * 2); margin-inline: auto; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--spacing-lg); padding: var(--spacing-lg) var(--spacing-md) var(--spacing-xl); }
+@media (min-width: 768px)  { .heroInterno { padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-xl); } }
+@media (min-width: 1024px) { .heroInterno { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: center; gap: var(--spacing-2xl); padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-xl); } }
+.aviso { width: 100%; max-width: calc(72rem + var(--margem-x) * 2); margin-inline: auto; padding: var(--spacing-md) var(--spacing-md) 0; }
+.principal { padding: var(--spacing-lg) var(--spacing-md) var(--spacing-2xl); }
+@media (min-width: 768px)  { .principal { padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-3xl); } }
+@media (min-width: 1024px) { .principal { padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-4xl); } }
+
+/* os fatos dentro do hero, na mesma largura e margens do resto da página */
+.fatosWrap { width: 100%; max-width: calc(72rem + var(--margem-x) * 2); margin-inline: auto; padding: 0 var(--spacing-md) var(--spacing-2xl); }
+@media (min-width: 768px)  { .fatosWrap { padding: 0 var(--spacing-lg) var(--spacing-3xl); } }
+@media (min-width: 1024px) { .fatosWrap { padding: 0 var(--spacing-xl) var(--spacing-3xl); } }
+
+/* só uns tons: manchas bem suaves de azul, verde e amarelo sobre o fundo claro, sem borda, para o hero se misturar com a página */
+.fundo { position: absolute; inset: 0; z-index: -1; pointer-events: none; background:
+  radial-gradient(ellipse 60% 70% at 8% 55%, color-mix(in srgb, var(--color-blue-200) 26%, transparent) 0, transparent 100%),
+  radial-gradient(ellipse 50% 60% at 40% 0%, color-mix(in srgb, var(--color-brand-200) 20%, transparent) 0, transparent 100%),
+  radial-gradient(ellipse 55% 70% at 96% 85%, color-mix(in srgb, var(--color-yellow-200) 30%, transparent) 0, transparent 100%);
+  /* some no fim, até a cor de fundo da página (a máscara só usa a transparência) */
+  -webkit-mask-image: linear-gradient(to bottom, var(--color-gray-900) 0%, var(--color-gray-900) 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, var(--color-gray-900) 0%, var(--color-gray-900) 55%, transparent 100%); }
+
+.texto { display: flex; flex-direction: column; align-items: flex-start; gap: var(--spacing-md); min-width: 0; }
+
+.h1 { margin: 0; max-width: 40rem; font: var(--text-heading-5); letter-spacing: var(--text-heading-5-tracking); color: var(--color-gray-800); text-wrap: balance; }
+/* um tom abaixo do preto do texto comum, só no tema claro (no escuro continua o texto principal) */
+:global([data-theme="dark"]) .h1 { color: var(--color-text-primary); }
+@media (min-width: 768px)  { .h1 { font: var(--text-heading-4); letter-spacing: var(--text-heading-4-tracking); } }
+/* desktop: testando o título em 40 px (heading-4), o mesmo do tablet */
+@media (min-width: 1024px) { .h1 { font: var(--text-heading-4); letter-spacing: var(--text-heading-4-tracking); } }
+@media (max-width: 479px)  { .h1 { font: var(--text-heading-6); letter-spacing: var(--text-heading-6-tracking); } }
+
+/* só a palavra de destaque, em verde (sem degradê nem traço por baixo) */
+.destaque { color: var(--color-text-brand); white-space: nowrap; }
+
+.lead { margin: 0; max-width: 34rem; font: var(--text-body-m); letter-spacing: var(--text-body-m-tracking); color: var(--color-text-secondary); }
+.acoes { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); padding-top: var(--spacing-xs); }
+
+/* ─── Composição de cartões translúcidos ─── */
+.palco { --meio-doc: 7rem; position: relative; min-height: 22rem; }
+@media (min-width: 1024px) { .palco { --meio-doc: 9rem; min-height: 28rem; } }
+.cartao { position: absolute; display: flex; align-items: center; justify-content: center; background: color-mix(in srgb, var(--color-bg-surface) 72%, transparent); backdrop-filter: blur(var(--spacing-sm)); -webkit-backdrop-filter: blur(var(--spacing-sm)); border: var(--border-width-thin) solid color-mix(in srgb, var(--color-bg-surface) 55%, var(--color-border-subtle)); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); animation: flutuar 7s ease-in-out infinite; }
+.documento { top: calc(2% + var(--spacing-sm) + var(--spacing-xs)); left: 50%; width: 14rem; height: 18rem; margin-left: -7rem; padding: var(--spacing-sm); transform: rotate(-4deg); }
+@media (min-width: 1024px) { .documento { width: 18rem; height: 22rem; margin-left: -9rem; padding: var(--spacing-md); } }
+.documento > * { width: 100%; height: 100%; }
+.icone { width: 3.5rem; height: 3.5rem; border-radius: var(--radius-md); }
+.verde { top: calc(6% + var(--spacing-sm) + var(--spacing-xs)); left: calc(50% + var(--meio-doc) - var(--spacing-lg)); transform: rotate(8deg); color: var(--color-text-brand); background: color-mix(in srgb, var(--color-bg-brand) 80%, transparent); animation-delay: -1.5s; }
+.azul { bottom: 10%; right: calc(50% + var(--meio-doc) - var(--spacing-lg)); transform: rotate(-7deg); color: var(--color-text-brand); background: color-mix(in srgb, var(--color-bg-brand) 80%, transparent); animation-delay: -3s; }
+.amarelo { bottom: 14%; left: calc(50% + var(--meio-doc) - var(--spacing-lg)); transform: rotate(5deg); color: var(--color-text-brand); background: color-mix(in srgb, var(--color-bg-brand) 80%, transparent); animation-delay: -4.5s; }
+@keyframes flutuar { 0%, 100% { translate: 0 0; } 50% { translate: 0 calc(var(--spacing-sm) * -1); } }
+@media (prefers-reduced-motion: reduce) { .cartao { animation: none; } }
+
+/* ─── Os três fatos: mesmo padrão dos cards de opção (borda cinza clara, raio, ícone cinza, título e texto no mesmo estilo) ─── */
+.fatos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--spacing-sm); }
+@media (min-width: 768px) { .fatos { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--spacing-md); } }
+.fato { --borda-opcao: var(--color-gray-300); display: flex; gap: var(--spacing-md); align-items: center; padding: var(--spacing-md); background: var(--color-bg-surface); border: var(--border-width-thin) solid var(--borda-opcao); border-radius: var(--radius-md); }
+:global([data-theme="dark"]) .fato { --borda-opcao: var(--color-gray-600); }
+.fatoIcone { flex-shrink: 0; display: inline-flex; color: var(--color-text-brand); }
+.fatoIcone svg { width: calc(var(--spacing-lg) + var(--spacing-xs)); height: calc(var(--spacing-lg) + var(--spacing-xs)); }
+.fatoCorpo { display: flex; flex-direction: column; gap: var(--spacing-2xs); min-width: 0; }
+.fatoTitulo { margin: 0; font: var(--text-subtitle-m); letter-spacing: var(--text-subtitle-m-tracking); color: var(--color-text-primary); }
+.fatoTexto { margin: 0; font: var(--text-body-xs); letter-spacing: var(--text-body-xs-tracking); color: var(--color-text-secondary); }

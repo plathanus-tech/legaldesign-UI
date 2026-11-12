@@ -1,0 +1,49 @@
+/* Casca do fluxo de preenchimento. Só tokens.
+   Media queries usam valores literais (limitação do CSS), iguais aos --breakpoint-*. */
+.page { min-height: 100dvh; background: var(--color-bg-default); color: var(--color-text-primary); font: var(--text-body-m); letter-spacing: var(--text-body-m-tracking); }
+
+/* Cabeçalho: ocupa a largura toda (a sidebar do resumo fica abaixo dele, à direita) */
+.header { position: sticky; top: 0; z-index: 10; background: var(--color-bg-default); }
+.header > header { padding-inline: var(--spacing-md); }
+@media (min-width: 768px)  { .header > header { padding-inline: var(--spacing-lg); } }
+@media (min-width: 1024px) { .header > header { padding-inline: var(--spacing-xl); } }
+.header > header > div > div:first-child { gap: var(--spacing-sm); min-width: 0; flex: 1 1 auto; }
+.header > header > div > div:first-child > :last-child { min-width: 0; }
+.header button { white-space: nowrap; flex-shrink: 0; }
+.modelo { font: var(--text-subtitle-m); color: var(--color-text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* "Ver resumo" só onde o resumo não aparece ao lado */
+@media (min-width: 1024px) { .verResumo { display: none; } }
+@media (max-width: 479px)  { .header { --control-padding-x-md: var(--spacing-md); } }
+
+/* ─── Layout: formulário no centro, resumo numa sidebar à direita (desktop) ─── */
+.layout { display: grid; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1024px) { .layout { grid-template-columns: minmax(0, 1fr) 24rem; } .layout.semLateral { grid-template-columns: minmax(0, 1fr); } }
+
+.main { padding: var(--spacing-lg) var(--spacing-md) var(--spacing-3xl); }
+@media (min-width: 768px)  { .main { padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-3xl); } }
+@media (min-width: 1024px) { .main { padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-4xl); } }
+/* O formulário fica centralizado na área da esquerda */
+.container { width: 100%; max-width: 52rem; margin-inline: auto; display: flex; flex-direction: column; gap: var(--spacing-xl); }
+.conteudo { min-width: 0; }
+
+/* Sidebar do resumo: fixa embaixo do cabeçalho, na altura da tela, com rolagem própria */
+.lateral { display: none; }
+@media (min-width: 1024px) {
+  .lateral {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    position: sticky;
+    top: 3.75rem;
+    height: calc(100dvh - 3.75rem);
+    overflow-y: auto;
+    padding: var(--spacing-xl) var(--spacing-lg);
+    background: var(--color-bg-surface);
+    border-left: var(--border-width-thin) solid var(--color-border-subtle);
+  }
+}
+.lateralTopo { display: flex; flex-direction: column; gap: var(--spacing-2xs); }
+.lateralTitulo { margin: 0; font: var(--text-heading-6); letter-spacing: var(--text-heading-6-tracking); color: var(--color-text-primary); }
+.lateralSub { margin: 0; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-tertiary); }
+
+/* Os steppers (etapas e páginas) estão em StepperFluxo.module.css */

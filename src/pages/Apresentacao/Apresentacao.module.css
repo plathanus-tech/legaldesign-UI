@@ -1,0 +1,98 @@
+/* Tela 0: apresentação e catálogo de modelos. Só tokens.
+   Media queries usam valores literais (limitação do CSS), iguais aos --breakpoint-*. */
+
+.page { overflow-x: clip; min-height: 100dvh; background: var(--color-bg-default); color: var(--color-text-primary); font: var(--text-body-m); letter-spacing: var(--text-body-m-tracking); }
+
+.brand { font: var(--text-heading-6); letter-spacing: var(--text-heading-6-tracking); color: var(--color-text-brand); }
+
+/* Cabeçalho alinhado à largura do conteúdo; no mobile, margens menores para caberem os dois links */
+.header > header { padding-inline: var(--spacing-md); }
+@media (min-width: 768px)  { .header > header { padding-inline: var(--spacing-lg); } }
+@media (min-width: 1024px) { .header > header { padding-inline: var(--spacing-xl); } }
+.header > header > div { max-width: 72rem; margin-inline: auto; }
+.header button { white-space: nowrap; }
+/* Celulares estreitos: padding lateral menor nos botões do cabeçalho para os dois links caberem em uma linha */
+@media (max-width: 479px) { .header { --control-padding-x-md: var(--spacing-sm); } }
+
+/* Topo mais curto: aproxima o usuário dos modelos */
+.main { padding: var(--spacing-lg) var(--spacing-md) var(--spacing-2xl); }
+@media (min-width: 768px)  { .main { padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-3xl); } }
+@media (min-width: 1024px) { .main { padding: var(--spacing-2xl) var(--spacing-xl) var(--spacing-4xl); } }
+
+.content { width: 100%; max-width: 72rem; margin-inline: auto; display: flex; flex-direction: column; gap: var(--spacing-xl); }
+
+/* ─── Introdução (hero compacto) ───
+   Áreas: celular = texto e fatos (sem ilustração); tablet = texto + ilustração, fatos em largura total;
+   desktop = texto e fatos à esquerda, ilustração à direita ocupando as duas linhas.
+   Espaços: celular = 16px do subtítulo aos itens e 36px dos itens ao card; tablet e desktop = 64px dos itens ao card
+   (o card fica a 32px do bloco pelo gap do conteúdo + a margem inferior da introdução). */
+.intro { display: grid; grid-template-columns: 1fr; grid-template-areas: 'text' 'pillars'; row-gap: var(--spacing-md); align-items: center; margin-bottom: var(--spacing-xs); }
+.introText { grid-area: text; display: flex; flex-direction: column; align-items: flex-start; gap: var(--spacing-md); min-width: 0; }
+@media (min-width: 768px)  { .intro { grid-template-columns: minmax(0, 1fr) 15rem; grid-template-areas: 'text art' 'pillars pillars'; gap: var(--spacing-lg) var(--spacing-xl); margin-bottom: var(--spacing-xl); } }
+@media (min-width: 1024px) { .intro { grid-template-columns: minmax(0, 1fr) 21.25rem; grid-template-areas: 'left art'; gap: var(--spacing-lg) var(--spacing-2xl); align-items: center; } }
+
+/* Abaixo do desktop o bloco some da grade (`display: contents`) e texto e itens continuam como antes; no desktop ele junta os dois,
+   com 32px entre o subtítulo e os itens, e a grade o centraliza na altura da ilustração */
+.introLeft { display: contents; }
+@media (min-width: 1024px) { .introLeft { grid-area: left; display: flex; flex-direction: column; gap: var(--spacing-xl); min-width: 0; } }
+
+.h1 {
+  margin: 0;
+  max-width: 40rem;
+  font: var(--text-heading-5);
+  letter-spacing: var(--text-heading-5-tracking);
+  color: var(--color-text-primary);
+  text-wrap: balance;
+}
+@media (min-width: 1024px) { .h1 { font: var(--text-heading-4); letter-spacing: var(--text-heading-4-tracking); } }
+@media (max-width: 479px)  { .h1 { font: var(--text-heading-6); letter-spacing: var(--text-heading-6-tracking); } }
+.lead { margin: 0; max-width: 38rem; font: var(--text-body-m); letter-spacing: var(--text-body-m-tracking); color: var(--color-text-secondary); }
+
+/* Fatos rápidos: ícone na linha do título (sem círculo), título em fonte de título e texto de apoio.
+   Colunas de larguras diferentes no desktop; empilham no celular. */
+.pillars { grid-area: pillars; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: var(--spacing-md); }
+@media (min-width: 768px) { .pillars { grid-template-columns: 0.85fr 1fr 1.25fr; gap: var(--spacing-lg); align-items: start; margin-top: var(--spacing-sm); } }
+@media (min-width: 1024px) { .pillars { gap: var(--spacing-xl); margin-top: 0; } }
+.pillar { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+.pillarTitle { margin: 0; display: flex; align-items: center; gap: var(--spacing-sm); font-family: var(--font-display); font-size: var(--font-size-lg); font-weight: var(--font-weight-heading); line-height: var(--line-height-snug); color: var(--color-text-primary); }
+.pillarTitle svg { flex-shrink: 0; color: var(--color-text-brand); }
+.pillarText { margin: 0; max-width: 24rem; font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+@media (max-width: 767px) { .pillarTitle { font-size: var(--font-size-base); } }
+
+/* Ilustração: decorativa; só a partir do tablet. É maior que a coluna de texto, mas cortada na altura dela com um
+   esmaecimento no pé, que funde o documento com o fundo da página. Assim o bloco termina nos itens e o espaço até o card
+   é o definido. */
+.art { display: none; grid-area: art; width: 100%; margin-inline: auto; align-self: start; }
+@media (min-width: 1024px) { .art { align-self: center; } }
+@media (min-width: 768px) {
+  .art {
+    display: block;
+    max-width: 15rem;
+    max-height: 15rem;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent);
+    mask-image: linear-gradient(to bottom, black 55%, transparent);
+  }
+}
+@media (min-width: 1024px) { .art { max-width: 21.25rem; max-height: 23rem; } }
+
+/* ─── Catálogo ─── */
+.catalog { display: flex; flex-direction: column; }
+/* Cabe vários modelos no futuro: cada card ocupa ao menos 22rem; com um só, ele ocupa a largura toda */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--spacing-lg); }
+
+/* ─── Painéis (Dialog) ─── */
+.text { margin: 0; font: var(--text-body-m); letter-spacing: var(--text-body-m-tracking); color: var(--color-text-secondary); }
+
+/* Resposta do FAQ com mais de um parágrafo, subtítulo e lista */
+.resposta { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.respostaTitulo { margin: 0; font: var(--text-subtitle-s); letter-spacing: var(--text-subtitle-s-tracking); font-weight: var(--font-weight-heading); color: var(--color-text-primary); }
+.respostaLista { margin: 0; padding-left: var(--spacing-lg); display: flex; flex-direction: column; gap: var(--spacing-xs); }
+
+/* Link do Instagram no cabeçalho: só o ícone, com área de toque confortável */
+.rede { display: inline-flex; align-items: center; justify-content: center; width: var(--spacing-2xl); height: var(--spacing-2xl); border-radius: var(--radius-control); color: var(--color-text-secondary); transition: background-color var(--transition-fast), color var(--transition-fast); }
+.rede:hover { background: var(--color-bg-subtle); color: var(--color-text-primary); }
+.rede:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+
+/* celular estreito: o ícone do Instagram fica um pouco menor (40, ainda acima do mínimo de 24) para o cabeçalho caber */
+@media (max-width: 479px) { .rede { width: calc(var(--spacing-xl) + var(--spacing-sm)); height: calc(var(--spacing-xl) + var(--spacing-sm)); } }

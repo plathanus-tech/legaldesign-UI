@@ -1,0 +1,65 @@
+/* Card de modelo do catálogo. Só tokens.
+   Dois contêineres: o card (decide se a ilustração aparece ao lado) e a área de conteúdo (decide se texto e ação
+   ficam lado a lado). O nome fica um nível abaixo do título da página (h1: 24 / 32 / 40px → nome: 20 / 24 / 32px). */
+.card { container-type: inline-size; container-name: model-card; }
+
+.layout { display: grid; grid-template-columns: minmax(0, 1fr); }
+
+/* Conteúdo: respiro equivalente ao padding "lg" do Card */
+.content { container-type: inline-size; container-name: model-content; padding: var(--spacing-md); }
+@media (min-width: 768px) { .content { padding: var(--spacing-lg) var(--spacing-xl) var(--spacing-xl); } }
+
+.inner { display: grid; grid-template-columns: 1fr; gap: var(--spacing-lg); }
+
+.main { display: flex; flex-direction: column; align-items: flex-start; gap: var(--spacing-sm); min-width: 0; }
+.name {
+  margin: var(--spacing-xs) 0 0;
+  max-width: 26ch;
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-heading);
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--text-heading-6-tracking);
+  color: var(--color-text-primary);
+  text-wrap: balance;
+}
+@media (min-width: 480px)  { .name { font: var(--text-heading-6); letter-spacing: var(--text-heading-6-tracking); } }
+@media (min-width: 1024px) { .name { font: var(--text-heading-5); letter-spacing: var(--text-heading-5-tracking); } }
+
+.desc { margin: 0; max-width: 34rem; font: var(--text-body-l); letter-spacing: var(--text-body-l-tracking); color: var(--color-text-secondary); }
+.note { margin: var(--spacing-xs) 0 0; max-width: 34rem; padding-left: var(--spacing-md); border-left: var(--spacing-2xs) solid var(--color-brand-300); font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+
+/* Informações pequenas: texto de apoio em uma linha que quebra, separado por pontos */
+.details { list-style: none; margin: var(--spacing-xs) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--spacing-2xs) var(--spacing-md); font: var(--text-caption-m); letter-spacing: var(--text-caption-m-tracking); color: var(--color-text-tertiary); }
+.details li { display: inline-flex; align-items: center; gap: var(--spacing-sm); }
+.details li + li::before { content: ''; width: var(--spacing-2xs); height: var(--spacing-2xs); border-radius: var(--radius-full); background: var(--color-text-tertiary); }
+
+/* Ação e, logo abaixo, a data da última atualização com a base em letra menor */
+.aside { display: flex; flex-direction: column; align-items: flex-start; gap: var(--spacing-sm); min-width: 0; margin-top: var(--spacing-xs); }
+.meta { display: flex; align-items: flex-start; gap: var(--spacing-sm); min-width: 0; color: var(--color-text-tertiary); }
+.meta svg { flex-shrink: 0; margin-top: var(--spacing-2xs); }
+.metaText { margin: 0; display: flex; flex-direction: column; gap: var(--spacing-2xs); }
+.metaDate { font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); font-weight: var(--font-weight-label); color: var(--color-text-secondary); }
+.metaNote { font: var(--text-caption-s); letter-spacing: var(--text-caption-s-tracking); color: var(--color-text-tertiary); }
+
+/* Ilustração: painel claro da cor da marca (50), afastado da borda do card, com cantos arredondados.
+   Estreito (celular): faixa de 160px no topo do card. Largo: lateral direita, ~32% do card (40% no tablet). A imagem
+   preenche o painel sem aumentar a altura do card: a altura vem do texto. */
+.art { display: block; position: relative; order: -1; height: 10rem; margin: var(--spacing-md) var(--spacing-md) 0; border-radius: var(--radius-md); background: var(--color-brand-50); }
+.art > img, .art > svg { position: absolute; inset: var(--spacing-xs); width: calc(100% - var(--spacing-sm)); height: calc(100% - var(--spacing-sm)); object-fit: contain; }
+
+@container model-card (min-width: 40rem) {
+  .layout { grid-template-columns: minmax(0, 1fr) 40%; }
+  .art { order: 0; height: auto; margin: var(--spacing-md); }
+}
+@container model-card (min-width: 56rem) {
+  .layout { grid-template-columns: minmax(0, 1fr) 32%; }
+}
+
+/* Conteúdo bem estreito (celular): botão em largura total */
+@container model-content (max-width: 24rem) { .aside { align-items: stretch; } .action > button { width: 100%; } }
+
+/* Card inteiro clicável: indica com cursor e sombra ao passar o mouse */
+.clicavel { cursor: pointer; border-radius: var(--radius-card); transition: box-shadow var(--transition-fast); }
+.clicavel:hover { box-shadow: var(--shadow-md); }
+@media (prefers-reduced-motion: reduce) { .clicavel { transition: none; } }

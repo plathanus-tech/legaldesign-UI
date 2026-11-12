@@ -1,0 +1,29 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Getting Started/Introduction" />
+
+# Design System Base
+
+Biblioteca base de componentes React e tokens de design, pensada para ser copiada para cada novo produto.
+
+## Como usar em um novo projeto
+
+1. Copie esta pasta para o novo projeto (a Base original nunca é editada).
+2. Edite **apenas** `src/tokens/brand.css`: cor primária, cor secundária, fontes e radius.
+3. Troque as fontes: `npm i @fontsource/<fonte>` e atualize as importações em `.storybook/preview.ts`.
+4. Construa o produto **reutilizando** os componentes existentes antes de criar novos.
+
+## Foundations
+
+Todos os componentes usam CSS custom properties de `src/tokens/tokens.css`.
+A identidade visual vem de `src/tokens/brand.css`:
+
+| Token | O que controla |
+|-------|----------------|
+| `--brand-primary` | Escala `--color-brand-50…950` e todas as ações primárias |
+| `--brand-secondary` | Escala `--color-secondary-50…950` (opcional) |
+| `--font-display` | Títulos, botões e elementos de destaque |
+| `--font-body` | Textos, labels, campos, tabelas |
+| `--radius-scale` | Multiplicador do arredondamento (opcional, padrão 1) |
+
+Para usar **uma fonte só**, defina `--font-display: var(--font-body)`.
