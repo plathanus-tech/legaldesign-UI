@@ -7,6 +7,7 @@ import { ComoFuncionaFluxo } from './ComoFuncionaFluxo';
 import { DocumentSketch } from './DocumentSketch';
 import { FACILIDADES, FAQ, ATUALIZADO_EM_PADRAO, INSTAGRAM_URL, NOME_DA_MARCA } from './content';
 import { IconeInstagram } from './IconeInstagram';
+import { ESTILOS } from '../Finalizar/estilos';
 import { ModelCard } from './ModelCard';
 import base from './Apresentacao.module.css';
 import styles from './ApresentacaoV2.module.css';
@@ -119,6 +120,7 @@ export function ApresentacaoV2({ onStart, atualizadoEm = ATUALIZADO_EM_PADRAO, a
             <div className={base.grid}>
               <ModelCard
                 nome="Contrato de locação de imóvel"
+                valores={ESTILOS.map(e => ({ rotulo: e.titulo, valor: e.preco }))}
                 descricao="Formalize a locação do seu imóvel com um contrato organizado e fácil de compreender."
                 detalhes={['Para quem vai alugar ou para corretores', 'Você revisa tudo antes de pagar', 'Receba em PDF']}
                 atualizacao={atualizacao}

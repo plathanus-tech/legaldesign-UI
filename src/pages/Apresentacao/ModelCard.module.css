@@ -30,6 +30,10 @@
 .note { margin: var(--spacing-xs) 0 0; max-width: 34rem; padding-left: var(--spacing-md); border-left: var(--spacing-2xs) solid var(--color-brand-300); font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
 
 /* Informações pequenas: texto de apoio em uma linha que quebra, separado por pontos */
+.prices { margin: var(--spacing-xs) 0 0; padding: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--spacing-2xs) var(--spacing-md); font: var(--text-body-s); letter-spacing: var(--text-body-s-tracking); color: var(--color-text-secondary); }
+.price { display: inline-flex; align-items: baseline; gap: var(--spacing-xs); }
+.price dt, .price dd { margin: 0; }
+.price dd { font-weight: var(--font-weight-label); color: var(--color-text-primary); }
 .details { list-style: none; margin: var(--spacing-xs) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--spacing-2xs) var(--spacing-md); font: var(--text-caption-m); letter-spacing: var(--text-caption-m-tracking); color: var(--color-text-tertiary); }
 .details li { display: inline-flex; align-items: center; gap: var(--spacing-sm); }
 .details li + li::before { content: ''; width: var(--spacing-2xs); height: var(--spacing-2xs); border-radius: var(--radius-full); background: var(--color-text-tertiary); }

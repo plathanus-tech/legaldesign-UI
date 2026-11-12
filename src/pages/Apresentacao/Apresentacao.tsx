@@ -4,6 +4,7 @@ import { Accordion, AppHeader, Button, Dialog, Feedback, Tooltip } from '../../i
 import ilustracaoLocacao from '../../assets/ilustracao-locacao.svg';
 import { ComoFuncionaFluxo } from './ComoFuncionaFluxo';
 import { LegalDesignIllustration } from './LegalDesignIllustration';
+import { ESTILOS } from '../Finalizar/estilos';
 import { ModelCard } from './ModelCard';
 import { FACILIDADES, FAQ, ATUALIZADO_EM_PADRAO, INSTAGRAM_URL, NOME_DA_MARCA } from './content';
 import { IconeInstagram } from './IconeInstagram';
@@ -122,6 +123,7 @@ export function Apresentacao({
             <div className={styles.grid}>
               <ModelCard
                 nome="Contrato de locação de imóvel"
+                valores={ESTILOS.map(e => ({ rotulo: e.titulo, valor: e.preco }))}
                 descricao="Formalize a locação do seu imóvel com um contrato organizado e fácil de compreender."
                 detalhes={['Para quem vai alugar ou para corretores', 'Você revisa tudo antes de pagar', 'Receba em PDF']}
                 atualizacao={atualizacao}
