@@ -40,8 +40,8 @@ function load(): { open: string[]; collapsed: boolean; device: Device } {
   catch { return base; }
 }
 
-/** URL da story renderizada sozinha (sem o chrome do Storybook), relativa ao iframe.html atual. */
-const frameUrl = (storyId?: string) => (storyId ? `iframe.html?id=${encodeURIComponent(storyId)}&viewMode=story` : '');
+/** URL da story renderizada sozinha (sem o chrome do Storybook). Dentro do Storybook é relativa ao iframe.html atual; no app "sistema" aponta para o Storybook publicado (VITE_STORYBOOK_URL). */
+const frameUrl = (storyId?: string) => (storyId ? `${import.meta.env.VITE_STORYBOOK_URL ?? ''}iframe.html?id=${encodeURIComponent(storyId)}&viewMode=story` : '');
 
 /**
  * Navegador de Protótipo: ferramenta de apoio FORA da interface final (mesmo padrão da Maglev).

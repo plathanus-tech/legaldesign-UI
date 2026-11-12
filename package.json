@@ -7,7 +7,11 @@
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build",
     "typecheck": "tsc -p tsconfig.app.json",
-    "check:tokens": "node scripts/check-tokens.mjs"
+    "check:tokens": "node scripts/check-tokens.mjs",
+    "build:storybook": "storybook build -o dist/storybook",
+    "build:sistema": "vite build --config vite.sistema.config.ts",
+    "build:pages": "npm run build:storybook && npm run build:sistema && node -e \"require(\\\"fs\\\").copyFileSync(\\\"pages-raiz/index.html\\\",\\\"dist/index.html\\\")\"",
+    "sistema": "vite --config vite.sistema.config.ts --port 6010"
   },
   "dependencies": {
     "@fontsource/raleway": "^5.3.0",
